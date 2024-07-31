@@ -1,5 +1,5 @@
 import { useGlobalContext } from "../context/GlobalContext";
-
+import { toast } from "react-toastify";
 const ProductCard = ({ id, image, category, name, price, description }) => {
   const { cartItems, addItemToCart } = useGlobalContext();
 
@@ -7,6 +7,7 @@ const ProductCard = ({ id, image, category, name, price, description }) => {
     addItemToCart({ id, name, image, description, price: Number(price) });
     const updatedCartItems = [...cartItems, id];
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    toast.success("added to cart")
   };
 
   return (
@@ -21,6 +22,7 @@ const ProductCard = ({ id, image, category, name, price, description }) => {
       </div>
       <button
         onClick={handleAddToCart}
+
         className='w-full self-center my-2 rounded-md bg-custom-pink text-white py-2 hover:bg-pink-700 transition-colors mt-auto'
       >
         Add to Cart

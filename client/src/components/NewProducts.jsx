@@ -5,12 +5,13 @@ import { BASEHOST } from "../use";
 import axios from "axios";
 import { useGlobalContext } from "../context/GlobalContext";
 import { CiShoppingCart } from "react-icons/ci";
-
+import { toast } from "react-toastify";
 const ProductCard = ({ id, image, category, name, price, description }) => {
   const { addItemToCart } = useGlobalContext();
 
   const handleAddToCart = () => {
     addItemToCart({ id, name, image, description, price });
+    toast.success("added to cart")
   };
 
   return (

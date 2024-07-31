@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HiSearch, HiChevronDown } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { listCategories } from "../lib/apiCalls";
+import debounce from 'lodash.debounce';
 
 const SearchContainer = () => {
   const navigate = useNavigate();
@@ -9,30 +10,42 @@ const SearchContainer = () => {
   const [selectedCatId, setSelectedCatId] = useState("");
   const [keyword, setKeyword] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [categories, setCategories] = useState([{id: '', name: "All Categories"}]);
+  const [categories, setCategories] = useState([{ id: '1', name: "All Categories" }]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (keyword || selectedCatId){
-      navigate(`/products?search=${keyword.trim().replace(' ', '-')}&catId=${selectedCatId}`);
-    }
+    navigate(`/products?search=${keyword.trim().replace(' ', '-')}&catId=${selectedCatId}`);
   };
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const categories = await listCategories();
-        setCategories(categories.filter((cat) => cat.id !== 4));
+        setCategories([{ id: '1', name: "All Categories" }, ...categories.filter((cat) => cat.id !== 4)]);
       } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
       }
-    }
+    };
 
     fetchCategories();
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    const debouncedSearch = debounce(() => {
+      navigate(`/products?search=${keyword.trim().replace(' ', '-')}&catId=${selectedCatId}`);
+    }, 300);
+
+    if (keyword.trim() || selectedCatId) {
+      debouncedSearch();
+    }
+
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [keyword, selectedCatId, navigate]);
 
   return (
-    <div className='my-2  mx-auto '>
+    <div className='my-2 mx-auto'>
       <div className='relative flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2'>
         <div className='relative w-full sm:w-auto'>
           <button
@@ -45,14 +58,14 @@ const SearchContainer = () => {
           {isDropdownOpen && (
             <div className='absolute z-10 w-full sm:w-48 mt-1 bg-white rounded-md shadow-lg'>
               {categories.map((category) => (
-                <a 
+                <a
                   key={category.id}
                   href='#'
                   className='block px-4 py-2 text-sm text-gray-700 hover:bg-[#E4258F] hover:text-white'
                   onClick={(e) => {
                     e.preventDefault();
                     setSelectedCategory(category.name);
-                    setSelectedCatId(category.id);
+                    setSelectedCatId(category.id === '1' ? '' : category.id);
                     setIsDropdownOpen(false);
                   }}
                 >

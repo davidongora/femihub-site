@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { createOrder, getProduct } from "../lib/apiCalls";
 import { useGlobalContext } from "../context/GlobalContext";
 
+
 const ProductViewPage = () => {
   const {addItemToCart, user} = useGlobalContext();  
   const { id } = useParams();
@@ -38,7 +39,8 @@ const ProductViewPage = () => {
     setLoading(true);
     try {
       if (!user) {
-        alert("Please log in to proceed with checkout.");
+        // alert("Please log in to proceed with checkout.");
+        toast.error("Please log in to proceed with checkout.")
         setLoading(false);
         return;
       }

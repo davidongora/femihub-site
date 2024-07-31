@@ -22,6 +22,9 @@ import ProductSection from './components/ProductSection';
 import Search from './components/Search';
 import { ToastContainer } from 'react-toastify';
 import ProductViewPage from './components/ProductView';
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 
 const Home = () => (
   <div className='px-2 md:px-[100px] mt-2'>
@@ -30,12 +33,14 @@ const Home = () => (
     <ProductSection title='Best Selling Products' />
     <NewProducts />
     <DownloadAppSection />
+    
   </div>
 );
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ToastContainer /> {/* ToastContainer should be here */}
       <TopNav />
       <MainNavbar />
       <Routes>
@@ -57,7 +62,6 @@ const App = () => {
       </Routes>
       <ChatbotModal />
       <Footer />
-      <ToastContainer />
     </BrowserRouter>
   );
 };
