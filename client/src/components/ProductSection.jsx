@@ -90,7 +90,7 @@ const ProductSection = ({ title }) => {
           </div>
         </>
       ) : (
-        <Message variant="success">No products found!</Message>
+        <Message variant="success">No product.....!</Message>
       )}
     </div>
   );

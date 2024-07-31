@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useGlobalContext } from "../context/GlobalContext";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import axios from "axios";
-import { BASEHOST } from "../use";
 import { toast } from "react-toastify";
 import { createOrder } from "../lib/apiCalls";
+import emailjs from '@emailjs/browser';
 
 const Cart = ({ isOpen, setIsOpen }) => {
-  const { cartItems, removeItemFromCart, addItemToCart, user, clearCart } =
-    useGlobalContext();
+  const { cartItems, removeItemFromCart, addItemToCart, user, clearCart } = useGlobalContext();
   const [totals, setTotals] = useState(0);
   const [loading, setLoading] = useState(false);
+  const form = useRef();
 
   useEffect(() => {
     if (cartItems.length > 0) {
@@ -24,18 +23,33 @@ const Cart = ({ isOpen, setIsOpen }) => {
     }
   }, [cartItems]);
 
+  const sendEmail = () => {
+    emailjs
+      .sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY')
+      .then(
+        () => {
+          
+          console.log('Email sent successfully');
+        },
+        (error) => {
+          console.log('Failed to send email:', error.text);
+        }
+      );
+  };
+
   const handleCheckout = async () => {
     setLoading(true);
     try {
       if (!user) {
-        // alert("Please log in to proceed with checkout.");
-        toast.error("Please log in to proceed with checkout."); // Example toast
-
+        toast.error("Please log in to proceed with checkout.");
         setLoading(false);
         return;
       }
+
       await createOrder(user?.user?.id, cartItems);
       toast.success("Your order has been created successfully");
+      sendEmail();
+
       setTimeout(() => {
         clearCart();
         setIsOpen(false);
@@ -151,6 +165,11 @@ const Cart = ({ isOpen, setIsOpen }) => {
                     Shipping and taxes calculated at checkout.
                   </p>
                   <div className='mt-6'>
+                    {/* <form ref={form} onSubmit={sendEmail} style={{ display: 'none' }}>
+                      <input type="hidden" name="user_name" value={user?.user?.name || ''} />
+                      <input type="hidden" name="user_email" value={user?.user?.email || ''} />
+                      <input type="hidden" name="order_details" value={JSON.stringify(cartItems)} />
+                    </form> */}
                     <button
                       onClick={handleCheckout}
                       className='w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#E4258F] hover:bg-[#C01F7E]'
