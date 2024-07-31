@@ -1,0 +1,455 @@
+Certainly! Here's the revised documentation with sample request bodies:
+
+---
+
+## API Documentation
+
+### Base URL
+```
+http://localhost:3000
+```
+
+### Authentication & Authorization
+
+#### Google Authentication
+
+- **GET /auth/google**
+  - **Description:** Redirects to Google OAuth for authentication.
+  - **Scope:** `profile`, `email`
+
+- **GET /auth/google/callback**
+  - **Description:** Handles Google OAuth callback and returns user info.
+
+#### Register a User
+
+- **POST /register**
+  - **Description:** Registers a new user.
+  - **Request Body:**
+    ```json
+    {
+      "name": "Jane Doe",
+      "email": "janedoe@example.com",
+      "phone_number": "+1234567890",
+      "password": "securepassword123"
+    }
+    ```
+  - **Responses:**
+    - `201 Created`: User registered successfully.
+    - `400 Bad Request`: Password is required.
+    - `500 Internal Server Error`: Error hashing password.
+
+#### Login
+
+- **POST /login**
+  - **Description:** Authenticates a user and returns a JWT token.
+  - **Request Body:**
+    ```json
+    {
+      "email": "janedoe@example.com",
+      "password": "securepassword123"
+    }
+    ```
+  - **Responses:**
+    - `200 OK`: Returns JWT token and user details.
+    - `400 Bad Request`: User not found or invalid password.
+    - `500 Internal Server Error`: Error during authentication.
+
+#### Logout
+
+- **POST /logout**
+  - **Description:** Logs out the user and destroys the session.
+  - **Responses:**
+    - `200 OK`: Logged out successfully.
+
+### Doctor Management
+
+#### Create a Doctor
+
+- **POST /doctors**
+  - **Description:** Registers a new doctor.
+  - **Request Body:**
+    ```json
+    {
+      "name": "Dr. John Smith",
+      "specialty": "Cardiologist",
+      "email": "drjohnsmith@example.com",
+      "phone_number": "+1234567890"
+    }
+    ```
+  - **Responses:**
+    - `201 Created`: Doctor registered successfully.
+    - `500 Internal Server Error`: Error during registration.
+
+#### List Doctors
+
+- **GET /doctors**
+  - **Description:** Retrieves a list of all doctors.
+  - **Responses:**
+    - `200 OK`: Returns list of doctors.
+    - `500 Internal Server Error`: Error retrieving data.
+
+#### Update a Doctor
+
+- **PUT /doctors/:id**
+  - **Description:** Updates doctor details.
+  - **Request Parameters:**
+    - `id`: Doctor ID.
+  - **Request Body:**
+    ```json
+    {
+      "name": "Dr. John Smith",
+      "specialty": "Cardiologist",
+      "email": "drjohnsmith@example.com",
+      "phone_number": "+0987654321"
+    }
+    ```
+  - **Responses:**
+    - `200 OK`: Doctor updated successfully.
+    - `500 Internal Server Error`: Error updating doctor.
+
+#### Delete a Doctor
+
+- **DELETE /doctors/:id**
+  - **Description:** Deletes a doctor.
+  - **Request Parameters:**
+    - `id`: Doctor ID.
+  - **Responses:**
+    - `200 OK`: Doctor deleted successfully.
+    - `500 Internal Server Error`: Error deleting doctor.
+
+### Community Forum
+
+#### List Forum Posts
+
+- **GET /forum_posts**
+  - **Description:** Retrieves a list of all forum posts.
+  - **Responses:**
+    - `200 OK`: Returns list of forum posts.
+    - `500 Internal Server Error`: Error retrieving posts.
+
+#### Create a Forum Post
+
+- **POST /forum_posts**
+  - **Description:** Creates a new forum post.
+  - **Request Body:**
+    ```json
+    {
+      "user_id": "user123",
+      "title": "Healthy Eating Tips",
+      "content": "Here are some tips for healthy eating..."
+    }
+    ```
+  - **Responses:**
+    - `201 Created`: Post created successfully.
+    - `500 Internal Server Error`: Error creating post.
+
+### Articles Management
+
+#### Create an Article
+
+- **POST /articles**
+  - **Description:** Creates a new article.
+  - **Request Body:**
+    ```json
+    {
+      "title": "The Importance of Regular Exercise",
+      "content": "Regular exercise is crucial for maintaining good health...",
+      "author_id": "author123"
+    }
+    ```
+  - **Responses:**
+    - `201 Created`: Article created successfully.
+    - `500 Internal Server Error`: Error creating article.
+
+#### List Articles
+
+- **GET /articles**
+  - **Description:** Retrieves a list of all articles.
+  - **Responses:**
+    - `200 OK`: Returns list of articles.
+    - `500 Internal Server Error`: Error retrieving articles.
+
+#### Update an Article
+
+- **PUT /articles/:id**
+  - **Description:** Updates an article.
+  - **Request Parameters:**
+    - `id`: Article ID.
+  - **Request Body:**
+    ```json
+    {
+      "title": "The Benefits of Yoga",
+      "content": "Yoga offers numerous benefits for both mind and body..."
+    }
+    ```
+  - **Responses:**
+    - `200 OK`: Article updated successfully.
+    - `500 Internal Server Error`: Error updating article.
+
+#### Delete an Article
+
+- **DELETE /articles/:id**
+  - **Description:** Deletes an article.
+  - **Request Parameters:**
+    - `id`: Article ID.
+  - **Responses:**
+    - `200 OK`: Article deleted successfully.
+    - `500 Internal Server Error`: Error deleting article.
+
+### Product Management
+
+#### Create a Product
+
+- **POST /products**
+  - **Description:** Creates a new product.
+  - **Request Body:**
+    ```json
+    {
+      "name": "Prenatal Vitamins",
+      "price": 29.99,
+      "description": "High-quality prenatal vitamins for expecting mothers."
+    }
+    ```
+  - **Responses:**
+    - `201 Created`: Product created successfully.
+    - `500 Internal Server Error`: Error creating product.
+
+#### List Products
+
+- **GET /products**
+  - **Description:** Retrieves a list of all products.
+  - **Responses:**
+    - `200 OK`: Returns list of products.
+    - `500 Internal Server Error`: Error retrieving products.
+
+#### Update a Product
+
+- **PUT /products/:id**
+  - **Description:** Updates a product.
+  - **Request Parameters:**
+    - `id`: Product ID.
+  - **Request Body:**
+    ```json
+    {
+      "name": "Prenatal Vitamins - Advanced Formula",
+      "price": 34.99,
+      "description": "Advanced formula for optimal prenatal health."
+    }
+    ```
+  - **Responses:**
+    - `200 OK`: Product updated successfully.
+    - `500 Internal Server Error`: Error updating product.
+
+#### Delete a Product
+
+- **DELETE /products/:id**
+  - **Description:** Deletes a product.
+  - **Request Parameters:**
+    - `id`: Product ID.
+  - **Responses:**
+    - `200 OK`: Product deleted successfully.
+    - `500 Internal Server Error`: Error deleting product.
+
+### Subscription Management
+
+#### Create a Subscription
+
+- **POST /subscriptions**
+  - **Description:** Creates a new subscription.
+  - **Request Body:**
+    ```json
+    {
+      "user_id": "user123",
+      "product_id": "product123",
+      "start_date": "2024-07-01",
+      "end_date": "2024-12-31"
+    }
+    ```
+  - **Responses:**
+    - `201 Created`: Subscription created successfully.
+    - `500 Internal Server Error`: Error creating subscription.
+
+#### List Subscriptions
+
+- **GET /subscriptions**
+  - **Description:** Retrieves a list of all subscriptions.
+  - **Responses:**
+    - `200 OK`: Returns list of subscriptions.
+    - `500 Internal Server Error`: Error retrieving subscriptions.
+
+#### Update a Subscription
+
+- **PUT /subscriptions/:id**
+  - **Description:** Updates a subscription.
+  - **Request Parameters:**
+    - `id`: Subscription ID.
+  - **Request Body:**
+    ```json
+    {
+      "start_date": "2024-07-01",
+      "end_date": "2025-06-30"
+    }
+    ```
+  - **Responses:**
+    - `200 OK`: Subscription updated successfully.
+    - `500 Internal Server Error`: Error updating subscription.
+
+#### Delete a Subscription
+
+- **DELETE /subscriptions/:id**
+  - **Description:** Deletes a subscription.
+  - **Request Parameters:**
+    - `id`: Subscription ID.
+  - **Responses:**
+    - `200 OK`: Subscription deleted successfully.
+    - `500 Internal Server Error`: Error deleting subscription.
+
+### Experience Sharing
+
+#### Share an Experience
+
+- **POST /experiences**
+  - **Description:** Shares a new experience.
+  - **Request Body:**
+    ```json
+    {
+      "user_id": "user123",
+      "title": "My Pregnancy Journey",
+      "content": "Sharing my personal experiences and tips during pregnancy..."
+    }
+    ```
+  - **Responses:**
+    - `201 Created`: Experience shared successfully.
+    - `500 Internal Server Error`: Error sharing experience.
+
+#### List Experiences
+
+- **GET /experiences**
+  - **Description:** Retrieves a list of all experiences.
+  - **Responses:**
+    - `200 OK`: Returns list of experiences.
+    - `500 Internal Server Error`: Error retrieving experiences.
+
+### Period Tracking
+
+#### Track a Period
+
+- **POST /periods**
+  - **Description:** Tracks a
+
+ new period.
+  - **Request Body:**
+    ```json
+    {
+      "user_id": "user123",
+      "start_date": "2024-07-01",
+      "end_date": "2024-07-05"
+    }
+    ```
+  - **Responses:**
+    - `201 Created`: Period tracked successfully.
+    - `500 Internal Server Error`: Error tracking period.
+
+#### List Periods
+
+- **GET /periods**
+  - **Description:** Retrieves a list of all tracked periods.
+  - **Responses:**
+    - `200 OK`: Returns list of periods.
+    - `500 Internal Server Error`: Error retrieving periods.
+
+### Payments
+
+#### Process a Payment
+
+- **POST /payments**
+  - **Description:** Processes a payment.
+  - **Request Body:**
+    ```json
+    {
+      "user_id": "user123",
+      "amount": 50.00,
+      "description": "Payment for premium subscription"
+    }
+    ```
+  - **Responses:**
+    - `201 Created`: Payment processed successfully.
+    - `500 Internal Server Error`: Error processing payment.
+
+#### List Payments
+
+- **GET /payments**
+  - **Description:** Retrieves a list of all payments.
+  - **Responses:**
+    - `200 OK`: Returns list of payments.
+    - `500 Internal Server Error`: Error retrieving payments.
+
+### Chat Management
+
+#### Send a Message
+
+- **POST /chats**
+  - **Description:** Sends a new chat message.
+  - **Request Body:**
+    ```json
+    {
+      "sender_id": "user123",
+      "receiver_id": "user456",
+      "message": "Hello, how are you?"
+    }
+    ```
+  - **Responses:**
+    - `201 Created`: Message sent successfully.
+    - `500 Internal Server Error`: Error sending message.
+
+#### List Messages
+
+- **GET /chats/:user_id**
+  - **Description:** Retrieves chat messages for a user.
+  - **Request Parameters:**
+    - `user_id`: User ID.
+  - **Responses:**
+    - `200 OK`: Returns list of messages.
+    - `500 Internal Server Error`: Error retrieving messages.
+
+### Recommendations
+
+#### Get Recommendations
+
+- **GET /recommendations/:user_id**
+  - **Description:** Retrieves recommendations for a user.
+  - **Request Parameters:**
+    - `user_id`: User ID.
+  - **Responses:**
+    - `200 OK`: Returns list of recommendations.
+    - `500 Internal Server Error`: Error retrieving recommendations.
+
+### Reminders
+
+#### Create a Reminder
+
+- **POST /reminders**
+  - **Description:** Creates a new reminder.
+  - **Request Body:**
+    ```json
+    {
+      "user_id": "user123",
+      "title": "Doctor's Appointment",
+      "date": "2024-08-15T10:00:00Z"
+    }
+    ```
+  - **Responses:**
+    - `201 Created`: Reminder created successfully.
+    - `500 Internal Server Error`: Error creating reminder.
+
+#### List Reminders
+
+- **GET /reminders**
+  - **Description:** Retrieves a list of all reminders.
+  - **Responses:**
+    - `200 OK`: Returns list of reminders.
+    - `500 Internal Server Error`: Error retrieving reminders.
+
+---
+
+Let me know if you need any more adjustments!
