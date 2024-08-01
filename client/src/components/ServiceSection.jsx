@@ -1,54 +1,35 @@
-import React from 'react';
-import dental from "../assets/dental.png"
-import surgery from "../assets/surgery.png"
-import diagonsis from "../assets/diagonsis.png"
-import cardiology from "../assets/cardiology.png"
-import bones from "../assets/bones.png"
-import eyecare from "../assets/eyecare.png"
+import React from "react";
 import doctors from "../assets/doctors.jpeg";
 
 const ServicesSection = () => {
   const services = [
     {
-      title: 'Dental treatments',
-      image: dental,
-      description: 'Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalarcu lacus vel facilisis volutpat est velitolm.',
-    },
-    {
-      title: 'Bones treatments',
-      image: bones,
-      description: 'Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalarcu lacus vel facilisis volutpat est velitolm.',
-    },
-    {
-      title: 'Diagnosis',
+      title: "Prenatal Care",
       image: doctors,
-      description: 'Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalarcu lacus vel facilisis volutpat est velitolm.',
+      description:
+        "We provide comprehensive healthcare for expectant mothers from conception to childbirth. Including regular check-ups, monitoring fetal development, nutrition advice, and education on childbirth preparation.",
     },
     {
-      title: 'Cardiology',
-      image: cardiology,
-      description: 'Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalarcu lacus vel facilisis volutpat est velitolm.',
+      title: "Postnatal Care",
+      image: doctors,
+      description:
+        "To ensure the well-being of mother and child after birth, we offer services from postpartum check-ups, breastfeeding support, family planning counseling, and newborn care guidance.",
     },
     {
-      title: 'Surgery',
-      image: surgery,
-      description: 'Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalarcu lacus vel facilisis volutpat est velitolm.',
-    },
-    {
-      title: 'Eye care',
-      image: eyecare,
-      description: 'Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalarcu lacus vel facilisis volutpat est velitolm.',
+      title: "Child Wellness Clinic",
+      image: doctors,
+      description:
+        "We extend care beyond maternity by providing routine check-ups, vaccinations, and preventive health measures for infants and children. We also offer growth monitoring, developmental assessments, and nutritional guidance.",
     },
   ];
 
   return (
     <section className="py-12 px-4 bg-gray-100">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-teal-600 mb-2">Services we provide</h2>
-        <p className="text-center text-gray-600 mb-8">
-          Lorem ipsum dolor sit amet consectetur adipiscing elit semper dalar
-          elementum tempus hac tellus libero accumsan.
-        </p>
+        <h2 className="text-3xl font-bold text-center text-teal-600 mb-8">
+          Services we provide
+        </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <ServiceCard key={index} {...service} />
@@ -68,8 +49,19 @@ const ServiceCard = ({ title, image, description }) => {
         <p className="text-gray-600 mb-4">{description}</p>
         <a href="#" className="text-teal-600 font-medium flex items-center">
           Learn more
-          <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg
+            className="w-4 h-4 ml-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </a>
       </div>

@@ -19,7 +19,6 @@ export const listProducts = async (search = "", category = "") => {
   }
 };
 
-
 export const getProduct = async (productId) => {
   try {
     const { data } = await axios.get(`${BASEHOST}/products/${productId}`, {
@@ -29,20 +28,23 @@ export const getProduct = async (productId) => {
     });
     return data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     const message = error?.response?.data?.error || error.message;
     throw new Error(message);
   }
 };
 
-
 export const listCategories = async () => {
   try {
-    const { data } = await axios.get(`${BASEHOST}/categories`, {
+    const res = await fetch(`${BASEHOST}/categories`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
+
+    const data = await res.json();
+
     return data;
   } catch (error) {
     const message = error?.response?.data?.error || error.message;
@@ -57,7 +59,7 @@ export const createOrder = async (userId, orderItems) => {
       products: orderItems,
     });
   } catch (error) {
-     const message = error?.response?.data?.error || error.message;
-     throw new Error(message);
+    const message = error?.response?.data?.error || error.message;
+    throw new Error(message);
   }
-}
+};

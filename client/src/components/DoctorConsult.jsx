@@ -1,8 +1,6 @@
-import React from 'react';
-import doctor from "../assets/doctor.png";
-import ServicesSection from './ServiceSection';
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from 'react-icons/fa';
-import { FiUser } from 'react-icons/fi';
+import React from "react";
+import { FiUser } from "react-icons/fi";
+import ServicesSection from "./ServiceSection";
 
 const DoctorConsult = () => {
   return (
@@ -10,7 +8,6 @@ const DoctorConsult = () => {
       <HeroSection />
       <FindDoctorSection />
       <ResultsSection />
-      <ServicesSection />
       <TestimonialSection />
     </div>
   );
@@ -24,18 +21,29 @@ const HeroSection = () => {
           Providing Quality Healthcare For A Brighter And Healthy Future
         </h1>
         <p className="text-gray-600 mb-6">
-          At Our Hospital, We Are Dedicated To Providing Exceptional Medical Care To Our Patients And Their Families. Our Experienced Team Of Medical Professionals, Cutting-Edge Technology, And Compassionate Approach Make Us A Leader In The Healthcare Industry.
+          At Our Hospital, We Are Dedicated To Providing Exceptional Medical
+          Care To Our Patients And Their Families. Our Experienced Team Of
+          Medical Professionals, Cutting-Edge Technology, And Compassionate
+          Approach Make Us A Leader In The Healthcare Industry.
         </p>
         <div className="flex space-x-4">
-          <button className="bg-custom-pink text-white px-6 py-2 rounded">Appointments</button>
-          <button className="bg-custom-pink text-white px-6 py-2 rounded">Watch Video</button>
+          <button className="bg-custom-pink text-white px-6 py-2 rounded">
+            Appointments
+          </button>
+          <button className="bg-custom-pink text-white px-6 py-2 rounded">
+            Watch Video
+          </button>
         </div>
       </div>
       <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center relative">
         <div className="absolute inset-0 flex justify-center items-center">
           <div className="bg-custom-pink rounded-full w-64 h-64 md:w-96 md:h-96"></div>
         </div>
-        <img src='/images/doctor.png' alt="Doctor" className="relative z-10  h-96 rounded-lg object-cover" />
+        <img
+          src="/images/doctor.png"
+          alt="Doctor"
+          className="relative z-10  h-96 rounded-lg object-cover"
+        />
         <div className="absolute bottom-0 right-0 bg-white p-2 rounded-lg shadow-md">
           <p className="text-sm font-semibold">24/7 Service</p>
         </div>
@@ -49,13 +57,26 @@ const FindDoctorSection = () => {
     <section className="py-12">
       <h2 className="text-2xl font-bold mb-6">Find A Doctor</h2>
       <form className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-        <input type="text" placeholder="Name" className="border p-2 rounded flex-grow" />
-        <input type="text" placeholder="Specialty" className="border p-2 rounded flex-grow" />
+        <input
+          type="text"
+          placeholder="Name"
+          className="border p-2 rounded flex-grow"
+        />
+        <input
+          type="text"
+          placeholder="Specialty"
+          className="border p-2 rounded flex-grow"
+        />
         <div className="flex items-center">
           <label className="mr-2">Available</label>
-          <input type="checkbox" className="form-checkbox h-5 w-5 text-teal-500" />
+          <input
+            type="checkbox"
+            className="form-checkbox h-5 w-5 text-teal-500"
+          />
         </div>
-        <button className="bg-custom-pink text-white px-6 py-2 rounded">Search</button>
+        <button className="bg-custom-pink text-white px-6 py-2 rounded">
+          Search
+        </button>
       </form>
     </section>
   );
@@ -88,33 +109,45 @@ const TestimonialSection = () => {
   const testimonials = [
     {
       quote: "An amazing service",
-      content: "Lorem ipsum dolor sit amet consectetur adipiscing lectus a nunc mauris scelerisque sed egestas.",
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipiscing lectus a nunc mauris scelerisque sed egestas.",
       name: "John Carter",
       position: "CEO at Google",
-      image: null
+      image: null,
     },
     {
       quote: "One of a kind service",
-      content: "Ultrices eros in cursus turpis massa tincidunt sem nulla pharetra diam sit amet nisl suscipit adipis.",
+      content:
+        "Ultrices eros in cursus turpis massa tincidunt sem nulla pharetra diam sit amet nisl suscipit adipis.",
       name: "Sophie Moore",
       position: "MD at Facebook",
-      image: null
+      image: null,
     },
     {
       quote: "The best service",
-      content: "Convallis posuere morbi leo urna molestie at elementum eu facilisis sapien pellentesque habitant.",
+      content:
+        "Convallis posuere morbi leo urna molestie at elementum eu facilisis sapien pellentesque habitant.",
       name: "Andy Smith",
       position: "CEO Dot Austere",
-      image: null
-    }
+      image: null,
+    },
   ];
 
-  const companies = ['Google', 'Facebook', 'YouTube', 'Pinterest', 'Twitch', 'Webflow'];
+  const companies = [
+    "Google",
+    "Facebook",
+    "YouTube",
+    "Pinterest",
+    "Twitch",
+    "Webflow",
+  ];
 
   return (
     <section className="py-16 px-4 bg-gray-100">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-teal-600 mb-2">Testimonial</h2>
+        <h2 className="text-3xl font-bold text-center text-teal-600 mb-2">
+          Testimonial
+        </h2>
         <p className="text-center text-gray-600 mb-12">
           Lorem ipsum dolor sit amet consectetur adipiscing elit semper dalar
           elementum tempus hac tellus libero accumsan.
@@ -160,7 +193,12 @@ const TrustedCompanies = ({ companies }) => {
       </h3>
       <div className="flex flex-wrap justify-center items-center gap-8">
         {companies.map((company, index) => (
-          <img key={index} src={`/path/to/${company.toLowerCase()}-logo.png`} alt={company} className="h-8" />
+          <img
+            key={index}
+            src={`/images/${company.toLowerCase()}-logo.png`}
+            alt={company}
+            className="h-8"
+          />
         ))}
       </div>
       <div className="flex justify-center mt-6">
@@ -175,7 +213,9 @@ const TrustedCompanies = ({ companies }) => {
 const NewsletterSubscription = () => {
   return (
     <div className="text-center">
-      <h3 className="text-2xl font-semibold mb-4">Subscribe to our newsletter</h3>
+      <h3 className="text-2xl font-semibold mb-4">
+        Subscribe to our newsletter
+      </h3>
       <form className="flex flex-col sm:flex-row justify-center items-center gap-4">
         <input
           type="email"

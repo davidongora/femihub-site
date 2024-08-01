@@ -1,33 +1,41 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { BASEHOST } from "../use";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { useGlobalContext } from "../context/GlobalContext";
-import { listProducts } from "../lib/apiCalls";
 import Message from "./Message";
 import ProductCard from "./ProductCard";
 
 const ProductSection = ({ title }) => {
   const { products, setProducts } = useGlobalContext();
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true);
-      try {
-        const products = await listProducts();
-        setProducts(products);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchProducts = async () => {
+    try {
+      setIsProcessing(true);
 
+      const res = await fetch(`${BASEHOST}/products`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await res.json();
+
+      setProducts(data);
+      setIsProcessing(false);
+    } catch (error) {
+      setError(error.message);
+      setIsProcessing(false);
+    }
+  };
+
+  useEffect(() => {
     fetchProducts();
-  }, [setProducts]);
+  }, []);
 
   const totalPages = Math.ceil(products.length / itemsPerPage);
   const currentProducts = products.slice(
@@ -42,11 +50,11 @@ const ProductSection = ({ title }) => {
   return (
     <div className="py-8">
       <h2 className="text-3xl font-bold text-gray-800 mb-8">{title}</h2>
-      {loading ? (
-        <Message>Loading products...</Message>
-      ) : error ? (
+      {error ? (
         <Message onClose={() => setError(null)}>{error}</Message>
-      ) : products.length > 0 ? (
+      ) : isProcessing ? (
+        <Message variant="success">please wait...</Message>
+      ) : (
         <>
           <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4">
             {currentProducts.map((product, index) => (
@@ -89,8 +97,6 @@ const ProductSection = ({ title }) => {
             </button>
           </div>
         </>
-      ) : (
-        <Message variant="success">No product.....!</Message>
       )}
     </div>
   );
