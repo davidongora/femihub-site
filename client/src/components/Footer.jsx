@@ -30,6 +30,15 @@ const Footer = () => {
                   femihub@gmail.com
                 </a>
               </li>
+              <li className='flex items-center space-x-2'>
+                <MdEmail className='w-5 h-5 flex-shrink-0' />
+                <a
+                  href='mailto:info@femihub.com'
+                  className='hover:text-orange-500 transition duration-300'
+                >
+                  info@femihub.com
+                </a>
+              </li>
             </ul>
             <div className='flex space-x-4 mt-4'>
               {[

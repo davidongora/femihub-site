@@ -3,7 +3,6 @@ import ProductSection from "./ProductSection";
 import { useLocation } from "react-router-dom";
 import { listProducts } from "../lib/apiCalls";
 import { useGlobalContext } from "../context/GlobalContext";
-import SearchContainer from "./SearchContainer";
 
 const Search = () => {
   const { setProducts } = useGlobalContext();
@@ -17,7 +16,7 @@ const Search = () => {
     const fetchProducts = async () => {
       try {
         setProducts([]);
-        const products = await listProducts(keyword.replace("-", " "), category);
+        const products = await listProducts(keyword.replace('-', ' '), category);
         setProducts(products);
       } catch (error) {
         console.log(error.message);
@@ -27,12 +26,10 @@ const Search = () => {
     if (keyword || category) {
       fetchProducts();
     }
-  }, [keyword, location, setProducts, category]);
-
+  }, [keyword, location]);
   return (
-    <div className="px-2 md:px-[100px] mt-2">
-      <SearchContainer />
-      <ProductSection title="Search Results" />
+    <div className='px-2 md:px-[100px] mt-2'>
+      <ProductSection title='Search Results' />
     </div>
   );
 };
