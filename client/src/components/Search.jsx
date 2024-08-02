@@ -10,14 +10,16 @@ const Search = () => {
   const keyword = location?.search
     ? location.search.split("=")[1].split("&")[0]
     : "";
-  const category = location?.search ? location.search.split("=")[2] : "";
+  const category = location?.search ? location.search.split("=")[2] : "0";
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        setProducts([]);
         const products = await listProducts(keyword.replace('-', ' '), category);
-        setProducts(products);
+        if(products.length > 0){
+          setProducts([]);
+          setProducts(products);
+        }
       } catch (error) {
         console.log(error.message);
       }

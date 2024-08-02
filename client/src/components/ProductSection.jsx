@@ -6,6 +6,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { useGlobalContext } from "../context/GlobalContext";
 import Message from "./Message";
 import ProductCard from "./ProductCard";
+import { useSearchParams } from "react-router-dom";
 
 const ProductSection = ({ title }) => {
   const { products, setProducts } = useGlobalContext();
@@ -13,6 +14,9 @@ const ProductSection = ({ title }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+
+  let [searchParams, setSearchParams] = useSearchParams();
+
 
   const fetchProducts = async () => {
     try {
@@ -34,7 +38,9 @@ const ProductSection = ({ title }) => {
   };
 
   useEffect(() => {
-    fetchProducts();
+    if (searchParams.size < 2) {
+      fetchProducts();
+    }
   }, []);
 
   let currentProducts = []
@@ -43,7 +49,7 @@ const ProductSection = ({ title }) => {
   if (products.length > 0) {
     totalPages = Math.ceil(products.length / itemsPerPage);
 
-    currentProducts = products.slice(
+    currentProducts = products?.slice(
       (currentPage - 1) * itemsPerPage,
       currentPage * itemsPerPage
     );
@@ -54,7 +60,6 @@ const ProductSection = ({ title }) => {
     setCurrentPage(page);
   };
 
-  console.log(currentProducts, "products")
 
   return (
     <div className="py-8">
