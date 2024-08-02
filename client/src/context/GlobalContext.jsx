@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { toast } from "react-toastify";
+
 
 const Context = createContext();
 
@@ -41,6 +43,8 @@ export const GlobalProvider = ({ children }) => {
         return [...prevItems, { ...item, qty: 1 }];
       }
     });
+    toast.success("added to cart."); // Example toast
+
   };
 
   const removeItemFromCart = (itemId, type = "") => {

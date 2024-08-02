@@ -36,13 +36,7 @@ const NewProducts = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(10);
 
-  // Get current products
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -60,6 +54,16 @@ const NewProducts = () => {
 
     getProducts();
   }, []);
+
+
+
+  // Get current products
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = (products && products.length > 0) ? products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  ) : [];
 
   return (
     <div className="py-8">
@@ -112,13 +116,14 @@ const NewProducts = () => {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {currentProducts.map((product, index) => (
+        {currentProducts?.map((product, index) => (
           <ProductCard key={index} {...product} />
         ))}
       </div>
 
       <div className="flex justify-center space-x-2 mt-6">
-        {[...Array(Math.ceil(products.length / productsPerPage)).keys()].map(
+
+        {products && products.length > 0 && [...Array(Math.ceil(products.length / productsPerPage)).keys()].map(
           (number) => (
             <button
               key={number}

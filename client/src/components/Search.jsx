@@ -3,6 +3,7 @@ import ProductSection from "./ProductSection";
 import { useLocation } from "react-router-dom";
 import { listProducts } from "../lib/apiCalls";
 import { useGlobalContext } from "../context/GlobalContext";
+import SearchContainer from "./SearchContainer";
 
 const Search = () => {
   const { setProducts } = useGlobalContext();
@@ -31,6 +32,7 @@ const Search = () => {
   }, [keyword, location]);
   return (
     <div className='px-2 md:px-[100px] mt-2'>
+      <SearchContainer/>
       <ProductSection title='Search Results' />
     </div>
   );
