@@ -37,15 +37,24 @@ const ProductSection = ({ title }) => {
     fetchProducts();
   }, []);
 
-  const totalPages = Math.ceil(products.length / itemsPerPage);
-  const currentProducts = products.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  let currentProducts = []
+  let totalPages = 0
+
+  if (products.length > 0) {
+    totalPages = Math.ceil(products.length / itemsPerPage);
+
+    currentProducts = products.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
+    );
+  }
+
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  console.log(currentProducts, "products")
 
   return (
     <div className="py-8">
@@ -57,15 +66,14 @@ const ProductSection = ({ title }) => {
       ) : currentProducts.length > 0 ? (
         <>
           <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4">
-            {currentProducts.map((product, index) => (
-              <ProductCard key={index} {...product} />
-            ))}
+            {currentProducts.map((product, index) => {
+              return (<ProductCard key={index} {...product} />)
+            })}
           </div>
           <div className="flex justify-center mt-8">
             <button
-              className={`mx-1 px-3 py-2 rounded-md ${
-                currentPage === 1 ? "bg-gray-300" : "bg-custom-pink text-white"
-              }`}
+              className={`mx-1 px-3 py-2 rounded-md ${currentPage === 1 ? "bg-gray-300" : "bg-custom-pink text-white"
+                }`}
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
             >
@@ -74,22 +82,20 @@ const ProductSection = ({ title }) => {
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}
-                className={`mx-1 px-3 py-2 rounded-md ${
-                  currentPage === page
-                    ? "bg-custom-pink text-white"
-                    : "bg-gray-300"
-                }`}
+                className={`mx-1 px-3 py-2 rounded-md ${currentPage === page
+                  ? "bg-custom-pink text-white"
+                  : "bg-gray-300"
+                  }`}
                 onClick={() => handlePageChange(page)}
               >
                 {page}
               </button>
             ))}
             <button
-              className={`mx-1 px-3 py-2 rounded-md ${
-                currentPage === totalPages
-                  ? "bg-gray-300"
-                  : "bg-custom-pink text-white"
-              }`}
+              className={`mx-1 px-3 py-2 rounded-md ${currentPage === totalPages
+                ? "bg-gray-300"
+                : "bg-custom-pink text-white"
+                }`}
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
             >

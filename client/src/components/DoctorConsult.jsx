@@ -99,7 +99,7 @@ const ResultsSection = () => {
 const ResultCard = ({ number, text }) => {
   return (
     <div className="text-center">
-      <p className="text-3xl font-bold text-teal-500">{number}</p>
+      <p className="text-3xl font-bold text-custom-pink">{number}</p>
       <p className="text-gray-600">{text}</p>
     </div>
   );
@@ -145,7 +145,7 @@ const TestimonialSection = () => {
   return (
     <section className="py-16 px-4 bg-gray-100">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-teal-600 mb-2">
+        <h2 className="text-3xl font-bold text-center text-custom-pink mb-2">
           Testimonial
         </h2>
         <p className="text-center text-gray-600 mb-12">
@@ -188,7 +188,7 @@ const TestimonialCard = ({ quote, content, name, position, image }) => {
 const TrustedCompanies = ({ companies }) => {
   return (
     <div className="mb-16">
-      <h3 className="text-xl font-semibold text-center text-teal-600 mb-8">
+      <h3 className="text-xl font-semibold text-center text-custom-pink mb-8">
         Trusted by 10,000+ companies around the world
       </h3>
       <div className="flex flex-wrap justify-center items-center gap-8">
