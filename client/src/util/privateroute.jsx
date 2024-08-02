@@ -7,7 +7,7 @@ const Privateroute = () => {
     const { user } =
         useGlobalContext();
     const navigate = useNavigate()
-    return (user ? navigate("/login") : <Outlet />)
+    return (!user ? navigate("/login") : <Outlet />)
 }
 
 export default Privateroute
