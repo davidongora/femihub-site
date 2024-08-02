@@ -54,7 +54,7 @@ const ProductSection = ({ title }) => {
         <Message onClose={() => setError(null)}>{error}</Message>
       ) : isProcessing ? (
         <Message variant="success">please wait...</Message>
-      ) : (
+      ) : currentProducts.length > 0 ? (
         <>
           <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4">
             {currentProducts.map((product, index) => (
@@ -97,6 +97,8 @@ const ProductSection = ({ title }) => {
             </button>
           </div>
         </>
+      ) : (
+        <Message variant="success">No products found!</Message>
       )}
     </div>
   );

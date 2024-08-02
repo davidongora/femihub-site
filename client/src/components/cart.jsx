@@ -28,7 +28,9 @@ const Cart = ({ isOpen, setIsOpen }) => {
     setLoading(true);
     try {
       if (!user) {
-        alert("Please log in to proceed with checkout.");
+        // alert("Please log in to proceed with checkout.");
+        toast.error("Please log in to proceed with checkout."); // Example toast
+
         setLoading(false);
         return;
       }
