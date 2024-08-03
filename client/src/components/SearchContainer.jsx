@@ -90,7 +90,7 @@ const SearchContainer = () => {
                return( 
                <Link
                   key={idx}
-                  to={`/products?search=${keyword
+                  to={category.name.toLowerCase() === "all categories" ? "/" : `/products?search=${keyword
                     .trim()
                     .replace(" ", "-")}&catId=${category.id}`}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#E4258F] hover:text-white"
