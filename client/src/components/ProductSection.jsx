@@ -70,7 +70,7 @@ const ProductSection = ({ title }) => {
     <div className="py-8">
       <h2 className="text-3xl font-bold text-gray-800 mb-8">{title}</h2>
       {error && (
-        <Message onClose={() => setError(null)}>SOmething went wromg..</Message>)}
+        <Message onClose={() => setError(null)}>Something went wrong..</Message>)}
       {isProcessing ? (
         <Message variant="success">please wait...</Message>
       ) : currentProducts.length > 0 && (

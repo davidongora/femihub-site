@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
 
 const Navbar = () => {
-  const { cartItems } = useGlobalContext();
+  const { cartItems, user, logout } = useGlobalContext();
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileCartModalOpen, setIsMobileCartOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState(null);
@@ -96,6 +96,8 @@ const Navbar = () => {
                       {item.name}
                     </a>
                   )}
+                  
+                  
                 </div>
               ))}
             </div>
@@ -180,6 +182,22 @@ const Navbar = () => {
                 )}
               </div>
             ))}
+            {user ? (
+              <button
+              onClick={logout}
+                className="nav-item capitalize text-[#184363] hover:text-gray-900 px-3 py-2 rounded-md text-sm font-bold"
+              >
+                logout
+              </button>
+            ):(
+              <Link
+              to={"/login"}
+                className="nav-item capitalize text-[#184363] hover:text-gray-900 px-3 py-2 rounded-md text-sm font-bold"
+              >
+                Login
+              </Link>
+            )}
+
           </div>
           <div className="pt-4 pb-3 border-t border-gray-700">
             <div className="flex items-center px-5">
