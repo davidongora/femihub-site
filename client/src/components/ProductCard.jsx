@@ -1,7 +1,9 @@
+import { Navigate, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
 
 const ProductCard = ({ id, image, category, name, price, description }) => {
   const { cartItems, addItemToCart } = useGlobalContext();
+  const navigate= useNavigate()
 
   const handleAddToCart = () => {
     addItemToCart({ id, name, image, description, price: Number(price) });
@@ -11,10 +13,14 @@ const ProductCard = ({ id, image, category, name, price, description }) => {
 
   return (
     <div className='bg-white border border-gray-300 rounded-lg shadow-md overflow-hidden transition-transform hover:translate-y-[-5px] flex flex-col h-full p-2'>
-      <div className='relative h-48'>
+      <div className='relative h-48 hover:cursor-pointer' onClick={()=>{
+        navigate(`/products/${id}`)
+      }}>
         <img src={image} alt={name} className='w-full h-full object-cover' />
       </div>
-      <div className='p-4 flex-grow'>
+      <div className='p-4 flex-grow hover:cursor-pointer' onClick={()=>{
+        navigate(`/products/${id}`)
+      }}>
         <h3 className='text-lg text-gray-600 py-1 mb-2'>{name}</h3>
         <span className='text-sm text-gray-500'>{category}</span>
         <h6 className='text-custom-pink text-md'>Ush {price}</h6>

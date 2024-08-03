@@ -17,6 +17,15 @@ const ProductSection = ({ title }) => {
 
   let [searchParams, setSearchParams] = useSearchParams();
 
+  useEffect(() => {
+    // if (searchParams.size < 2) {
+    if (products.length <= 0) {
+      fetchProducts();
+
+    }
+    // }
+  }, []);
+
 
   const fetchProducts = async () => {
     try {
@@ -37,11 +46,7 @@ const ProductSection = ({ title }) => {
     }
   };
 
-  useEffect(() => {
-    if (searchParams.size < 2) {
-      fetchProducts();
-    }
-  }, []);
+
 
   let currentProducts = []
   let totalPages = 0
@@ -64,11 +69,11 @@ const ProductSection = ({ title }) => {
   return (
     <div className="py-8">
       <h2 className="text-3xl font-bold text-gray-800 mb-8">{title}</h2>
-      {error ? (
-        <Message onClose={() => setError(null)}>{error}</Message>
-      ) : isProcessing ? (
+      {error && (
+        <Message onClose={() => setError(null)}>SOmething went wromg..</Message>)}
+      {isProcessing ? (
         <Message variant="success">please wait...</Message>
-      ) : currentProducts.length > 0 ? (
+      ) : currentProducts.length > 0 && (
         <>
           <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4">
             {currentProducts.map((product, index) => {
@@ -108,8 +113,6 @@ const ProductSection = ({ title }) => {
             </button>
           </div>
         </>
-      ) : (
-        <Message variant="success">No products found!</Message>
       )}
     </div>
   );

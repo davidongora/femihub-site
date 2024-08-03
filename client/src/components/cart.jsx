@@ -7,12 +7,14 @@ import axios from "axios";
 import { BASEHOST } from "../use";
 import { toast } from "react-toastify";
 import { createOrder } from "../lib/apiCalls";
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({ isOpen, setIsOpen }) => {
   const { cartItems, removeItemFromCart, addItemToCart, user, clearCart } =
     useGlobalContext();
   const [totals, setTotals] = useState(0);
   const [loading, setLoading] = useState(false);
+  const navigate= useNavigate()
 
   useEffect(() => {
     if (cartItems.length > 0) {
@@ -29,16 +31,21 @@ const Cart = ({ isOpen, setIsOpen }) => {
     try {
       if (!user) {
         // alert("Please log in to proceed with checkout.");
+        
         toast.error("Please log in to proceed with checkout."); // Example toast
 
         setLoading(false);
         return;
       }
-      await createOrder(user?.user?.id, cartItems);
-      toast.success("Your order has been created successfully");
+      navigate("/payment")
+      setIsOpen(!isOpen)
+      
+
+      // await createOrder(user?.user?.id, cartItems);
+      // toast.success("Your order has been created successfully");
       setTimeout(() => {
-        clearCart();
-        setIsOpen(false);
+        // clearCart();
+        // setIsOpen(false);
       }, 5000);
     } catch (error) {
       const message = error?.response

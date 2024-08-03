@@ -87,24 +87,24 @@ const SearchContainer = () => {
             <div className="absolute z-10 w-full sm:w-48 mt-1 bg-white rounded-md shadow-lg">
               {categories.map((category, idx) => {
 
-               return( 
-               <Link
-                  key={idx}
-                  to={`/products?search=${keyword
-                    .trim()
-                    .replace(" ", "-")}&catId=${category.id}`}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#E4258F] hover:text-white"
-                  onClick={(e) => {
-                    setSelectedCategory(category.name);
-                    setSelectedCatId(category.id);
-                    setIsDropdownOpen(false);
-                  }}
-                >
-                  {category.name}
-                </Link>
+                return (
+                  <a
+                    key={idx}
+                    href={category.name.toLowerCase() === "all categories" ? "/" : `/products?search=${keyword
+                      .trim()
+                      .replace(" ", "-")}&catId=${category.id}`}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#E4258F] hover:text-white"
+                    onClick={(e) => {
+                      setSelectedCategory(category.name);
+                      setSelectedCatId(category.id);
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    {category.name}
+                  </a>
                 )
 
-})}
+              })}
             </div>
           )}
         </div>
