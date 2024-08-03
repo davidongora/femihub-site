@@ -61,46 +61,6 @@ const Payment = () => {
                                 <input type="email" id="email" onChange={(e)=>setEmail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
                             </div>
                             <div className="col-span-2">
-                                <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name on card</label>
-                                <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-                            </div>
-                            <div className="col-span-2">
-                                <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Card  Number</label>
-                                <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-                            </div>
-                            <div className="col-span-2">
-                                <div className='grid grid-cols-3 gap-2'>
-                                    <div className='col-span-2'>
-                                        <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expiration date (MM/yy)</label>
-                                        <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-                                    </div>
-                                    <div className='col-span-1'>
-                                        <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CVC</label>
-                                        <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <div className="col-span-2">
-                                <div className='grid grid-cols-3 gap-2'>
-                                    <div className="col-span-1">
-                                        <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
-                                        <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-                                    </div>
-                                    <div className="col-span-1">
-                                        <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">State/Province</label>
-                                        <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-                                    </div>
-                                    <div className="col-span-1">
-                                        <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Postal Code</label>
-                                        <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div className="col-span-2">
                                 <PaystackButton {...componentProps} currency='ksh' className="bg-custom-pink hover:bg-white hover:text-custom-pink text-white py-3 rounded-md w-full mt-4 focus:outline-none focus:ring focus:ring-blue-200" />
 
                             </div>
