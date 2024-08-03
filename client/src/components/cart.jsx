@@ -39,6 +39,7 @@ const Cart = ({ isOpen, setIsOpen }) => {
       }
       navigate("/payment")
       setIsOpen(!isOpen)
+      
 
       // await createOrder(user?.user?.id, cartItems);
       // toast.success("Your order has been created successfully");
