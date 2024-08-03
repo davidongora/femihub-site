@@ -18,6 +18,7 @@ const ProductViewPage = () => {
     // Fetch product details based on productId
     const fetchProduct = async () => {
       try {
+
         const product = await getProduct(id);
         setProduct(product);
       } catch (error) {
@@ -42,11 +43,11 @@ const ProductViewPage = () => {
         setLoading(false);
         return;
       }
-      await createOrder(user?.user?.id, [{...product, qty: quantity}]);
+      // await createOrder(user?.user?.id, [{...product, qty: quantity}]);
       toast.success("Your order has been created successfully");
       setTimeout(() => {
-        navigate('/')
-      }, 5000);
+        navigate('/payment')
+      }, 1000);
     } catch (error) {
       const message = error?.response
         ? error?.response?.data?.error
