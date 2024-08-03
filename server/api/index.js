@@ -12,10 +12,10 @@ const paypal = require('@paypal/checkout-server-sdk');
 require('dotenv').config();
 
 
-const DBHOST = process.env.DBHOST;
-const DBUSER = process.env.DBUSER;
-const PASSWORD = process.env.PASSWORD;
-const DATABASE = process.env.DATABASE;
+const DBHOST = '45.56.98.224';
+const DBUSER = 'femihub_femihub';
+const PASSWORD = '$6H-ksQ,M&)*';
+const DATABASE = 'femihub_femihub_db';
 
 // PayPal environment configuration
 let environment = new paypal.core.SandboxEnvironment('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET');
@@ -83,6 +83,9 @@ const db = mysql.createConnection({
     password: PASSWORD,
     database: DATABASE,
     port: 3306,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
   });
 
 db.connect((err) => {
