@@ -70,7 +70,6 @@ export const GlobalProvider = ({ children }) => {
     setCartItems([]);
   };
 
-  const totalprice=cartItems.reduce((a, c)=> a + c.price)
   const logout = () => {
     setUser(null);
   }
@@ -83,7 +82,6 @@ export const GlobalProvider = ({ children }) => {
         removeItemFromCart,
         clearCart,
         user,
-        totalprice,
         setUser,
         logout,
         products,
