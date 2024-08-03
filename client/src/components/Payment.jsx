@@ -25,12 +25,16 @@ const Payment = () => {
 
 
     console.log(cartItems)
+    let subtotal=0
+    if(cartItems.length > 0){
+        subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+    }
     // Calculate total amount
-    const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
     const total = subtotal + shippingCost - discount;
     const totalInKobo = total * 100; // Paystack requires amount in Kobo
 
-    const publicKey = "your-paystack-public-key"; // Replace with your Paystack public key
+    const publicKey = "pk_test_0fe6b9f7f7e55a51fa421232e4588ccbccfbe397"; // Replace with your Paystack public key
 
     // Paystack button configuration
     const componentProps = {
@@ -54,7 +58,7 @@ const Payment = () => {
                         <form className="w-full mx-auto grid grid-cols-2 gap-2">
                             <div className="mb-5 col-span-2">
                                 <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                <input type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+                                <input type="email" id="email" onChange={(e)=>setEmail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
                             </div>
                             <div className="col-span-2">
                                 <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name on card</label>
@@ -97,7 +101,7 @@ const Payment = () => {
 
                             </div>
                             <div className="col-span-2">
-                                <PaystackButton {...componentProps} className="bg-custom-pink hover:bg-white hover:text-custom-pink text-white py-3 rounded-md w-full mt-4 focus:outline-none focus:ring focus:ring-blue-200" />
+                                <PaystackButton {...componentProps} currency='ksh' className="bg-custom-pink hover:bg-white hover:text-custom-pink text-white py-3 rounded-md w-full mt-4 focus:outline-none focus:ring focus:ring-blue-200" />
 
                             </div>
 

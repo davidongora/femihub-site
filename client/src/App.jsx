@@ -24,6 +24,7 @@ import { ToastContainer } from "react-toastify";
 import ProductViewPage from "./components/ProductView";
 import Payment from "./components/Payment";
 import Privateroute from "./util/privateroute";
+import Order from "./components/orders/Order";
 
 const Home = () => (
   <div className="px-2 md:px-[100px] mt-2">
@@ -55,6 +56,7 @@ const App = () => {
         <Route path="/postnatal" element={<PostnatalInfo />} />
         <Route path="/maternal-wellness" element={<MaternalWellness />} />
         <Route path="/products" element={<Search />} />
+        <Route path="/orders" element={<Order />} />
         <Route path="/products/:id" element={<ProductViewPage />} />
         <Route element={<Privateroute />}>
           <Route path="/payment" element={<Payment />} /></Route>

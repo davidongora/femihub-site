@@ -38,12 +38,13 @@ const Cart = ({ isOpen, setIsOpen }) => {
         return;
       }
       navigate("/payment")
+      setIsOpen(!isOpen)
 
-      await createOrder(user?.user?.id, cartItems);
-      toast.success("Your order has been created successfully");
+      // await createOrder(user?.user?.id, cartItems);
+      // toast.success("Your order has been created successfully");
       setTimeout(() => {
-        clearCart();
-        setIsOpen(false);
+        // clearCart();
+        // setIsOpen(false);
       }, 5000);
     } catch (error) {
       const message = error?.response
