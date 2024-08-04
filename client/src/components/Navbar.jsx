@@ -63,11 +63,10 @@ const Navbar = () => {
                         <FaChevronDown className="ml-1 text-[#E4258F] group-hover:text-gray-900 transition duration-300" />
                       </button>
                       <div
-                        className={`absolute z-10 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ${
-                          activeSubmenu === index
+                        className={`absolute z-10 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ${activeSubmenu === index
                             ? "opacity-100 visible"
                             : "opacity-0 invisible"
-                        }`}
+                          }`}
                       >
                         <div
                           className="py-1"
@@ -96,8 +95,8 @@ const Navbar = () => {
                       {item.name}
                     </a>
                   )}
-                  
-                  
+
+
                 </div>
               ))}
             </div>
@@ -153,11 +152,10 @@ const Navbar = () => {
                       <FaChevronDown className="ml-1 text-[#E4258F] group-hover:text-gray-900 transition duration-300" />
                     </button>
                     <div
-                      className={`pl-4 transition-all duration-300 ${
-                        activeSubmenu === index
+                      className={`pl-4 transition-all duration-300 ${activeSubmenu === index
                           ? "max-h-40 opacity-100"
                           : "max-h-0 opacity-0"
-                      } overflow-hidden`}
+                        } overflow-hidden`}
                     >
                       {item.submenu.map((subItem) => (
                         <a
@@ -184,17 +182,23 @@ const Navbar = () => {
             ))}
             {user ? (
               <button
-              onClick={logout}
+                onClick={logout}
                 className="nav-item capitalize text-[#184363] hover:text-gray-900 px-3 py-2 rounded-md text-sm font-bold"
               >
                 logout
               </button>
-            ):(
+            ) : (
               <Link
               to={"/login"}
                 className="nav-item capitalize text-[#184363] hover:text-gray-900 px-3 py-2 rounded-md text-sm font-bold"
               >
                 Login
+              </Link>
+              <Link
+              to={"/signup"}
+                className="nav-item capitalize text-[#184363] hover:text-gray-900 px-3 py-2 rounded-md text-sm font-bold"
+              >
+                signup
               </Link>
             )}
 
