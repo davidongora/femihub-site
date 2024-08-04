@@ -188,6 +188,7 @@ const Navbar = () => {
                 logout
               </button>
             ) : (
+              <>
               <Link
               to={"/login"}
                 className="nav-item capitalize text-[#184363] hover:text-gray-900 px-3 py-2 rounded-md text-sm font-bold"
@@ -200,6 +201,7 @@ const Navbar = () => {
               >
                 signup
               </Link>
+              </>
             )}
 
           </div>
