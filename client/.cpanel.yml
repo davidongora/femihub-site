@@ -1,14 +1,11 @@
----
 deployment:
   tasks:
-    - export DEPLOYPATH=${DEPLOYPATH:-'public_html'}
-    - echo "Running build for Vite project..."
-    # - npm install
-    - pnpm install
-    - pnpm run build
-    # - npm run build
-    - echo "Clearing current content in ${DEPLOYPATH}..."
-    - rm -rf ${DEPLOYPATH}/*
-    - echo "Copying built files to ${DEPLOYPATH}..."
-    - cp -R dist/* ${DEPLOYPATH}/
-    - echo "Deployment completed."
+    - export DEPLOYPATH='/home/femihub/public_html'
+    - echo "Running build for Vite project..." >> /home/femihub/deploy.log
+    - pnpm install >> /home/femihub/deploy.log 2>&1
+    - pnpm run build >> /home/femihub/deploy.log 2>&1
+    - echo "Clearing current content in ${DEPLOYPATH}..." >> /home/femihub/deploy.log
+    - rm -rf ${DEPLOYPATH}/* >> /home/femihub/deploy.log 2>&1
+    - echo "Copying built files to ${DEPLOYPATH}..." >> /home/femihub/deploy.log
+    - cp -R dist/* ${DEPLOYPATH}/ >> /home/femihub/deploy.log 2>&1
+    - echo "Deployment completed." >> /home/femihub/deploy.log
