@@ -3,8 +3,10 @@ deployment:
   tasks:
     - export DEPLOYPATH=${DEPLOYPATH:-'public_html'}
     - echo "Running build for Vite project..."
-    - npm install
-    - npm run build
+    # - npm install
+    - pnpm install
+    - pnpm run build
+    # - npm run build
     - echo "Clearing current content in ${DEPLOYPATH}..."
     - rm -rf ${DEPLOYPATH}/*
     - echo "Copying built files to ${DEPLOYPATH}..."

@@ -63,7 +63,7 @@ const SearchContainer = () => {
       try {
         const categoriesdata = await listCategories();
 
-        setCategories(Array.from(new Set([...categories, ...categoriesdata.filter((cat) => cat.id !== 4)])));
+        setCategories(Array.from(new Set([...categories, ...categoriesdata.filter((cat) => cat.id !== 5)])));
       } catch (error) {
         console.log(error.message);
       }
