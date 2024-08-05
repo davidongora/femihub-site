@@ -1,7 +1,7 @@
 deployment:
   tasks:
-    - export DEPLOYPATH=''/home6/femihub/public_html'
-    - echo "Running build for Vite project..." >> '/home6/femihub/public_html/deploy.log'
+    - export DEPLOYPATH='/home6/femihub/public_html'
+    - echo "Running build for Vite project..." >> /home6/femihub/deploy.log
     - pnpm install >> /home6/femihub/deploy.log 2>&1
     - pnpm run build >> /home6/femihub/deploy.log 2>&1
     - echo "Clearing current content in ${DEPLOYPATH}..." >> /home6/femihub/deploy.log
