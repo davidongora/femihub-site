@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=${DEPLOYPATH:-'public_html'}
+    - export DEPLOYPATH = '/home/femihub/public_html'
     - echo "Running build for Vite project..."
     # - npm install
     - pnpm install
