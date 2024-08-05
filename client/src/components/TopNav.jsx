@@ -27,7 +27,7 @@ const TopNav = () => {
       <div className='flex flex-row items-center gap-2 self-center'>
         <CiPhone color='#E4258F' className='h-4 w-4' />
         <p className='text-[#56778F] font-semibold text-sm'>
-          Sales & Service Support / 999-456-6782
+          Sales & Service Support /  +256 700 734139
         </p>
       </div>
       <div className='flex flex-row items-center gap-4'>
