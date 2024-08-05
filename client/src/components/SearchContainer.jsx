@@ -118,7 +118,7 @@ const SearchContainer = () => {
               setKeyword(e.target.value)
               navigate(`/products?search=${e.target.value
                 .trim()
-                .replace(" ", "-")}&catId=${selectedCatId}`)
+                .replace(" ", "-")}`)
             }}
           />
           <button
