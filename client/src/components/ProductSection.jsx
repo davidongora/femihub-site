@@ -10,6 +10,8 @@ import { useSearchParams } from "react-router-dom";
 
 const ProductSection = ({ title }) => {
   const { products, setProducts } = useGlobalContext();
+  const [newproducts, setNewProducts] = useState([])
+
   const [error, setError] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,6 +22,7 @@ const ProductSection = ({ title }) => {
 
   useEffect(() => {
     if (products.length <= 0) {
+      console.log("hit")
       fetchProducts();
     }
   }, []);
@@ -36,7 +39,10 @@ const ProductSection = ({ title }) => {
 
       const data = await res.json();
 
-      setProducts(data);
+      console.log(data, "data")
+
+      // setProducts(data);
+      setNewProducts(data)
       setIsProcessing(false);
     } catch (error) {
       setError(error.message);
@@ -58,6 +64,13 @@ const ProductSection = ({ title }) => {
       (currentPage - 1) * itemsPerPage,
       currentPage * itemsPerPage
     );
+  }else{
+    totalPages = Math.ceil(newproducts.length / itemsPerPage);
+
+    currentProducts = newproducts.length > 0 ?newproducts?.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
+    ) : [];
   }
 
 

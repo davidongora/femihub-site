@@ -9,14 +9,12 @@ import { useSearchParams } from "react-router-dom";
 const Search = () => {
   const { setProducts, products } = useGlobalContext();
   const location = useLocation();
-  // const keyword = location?.search
-  //   ? location.search.split("=")[1].split("&")[0]
-  //   : "";
-  // const category = location?.search ? location.search.split("=")[2] : "0";
+  const keyword = location?.search
+    ? location.search.split("=")[1].split("&")[0]
+    : "";
+  const category = location?.search ? location.search.split("=")[2] : "0";
 
   const [searchParams, setSearchParams] =useSearchParams()
-
-
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -34,11 +32,11 @@ const Search = () => {
 
       fetchProducts();
     
-  }, [searchParams]);
+  }, [keyword, category]);
   return (
     <div className='px-2 md:px-[100px] mt-2'>
       <SearchContainer/>
-      {products.length > 0 ? <ProductSection title='Search Results' /> : <div className="text-center text-2xl font-bold">No results found</div>}
+      <ProductSection title='Search Results' />
     </div>
   );
 };
