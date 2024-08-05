@@ -3,6 +3,8 @@ import pepPills from "../assets/pep-pills.jpeg";
 import HIVTesting from "../assets/hiv-testing.png";
 import pep from "../assets/PEP.jpeg";
 import pepAssessment from "../assets/prepAssessment.jpeg";
+import { DropdownMenuIcon } from "@radix-ui/react-icons";
+import { ArrowDown } from "lucide-react";
 
 const PEPInfo = () => {
   return (
@@ -39,39 +41,51 @@ const PEPInfo = () => {
               }}
             />
           </div>
-          <div className='md:px-8'>
-            <h2 className='text-2xl font-bold mt-4 px-4 md:px-8'>
-              Facts about PEP
-            </h2>
-            <ul className='list-disc px-8 md:px-12'>
-              <li className='py-2'>
-                <p className='text-gray-700'>
-                  PEP are ARV's that may be used to prevent HIV infection in a
-                  person exposed to HIV within 72 hours. You must take PEP
-                  within 72 hours of exposure for it to work optimally.
-                </p>
-              </li>
-              <li className='py-2'>
-                <p className='text-gray-700'>
-                  PEP will most likely not prevent HIV infection if it is
-                  started more than 72 hours after exposure.
-                </p>
-              </li>
-              <li className='py-2'>
-                <p className='text-gray-700'>
-                  You must take one pill daily for 28 days without skipping a
-                  dose.
-                </p>
-              </li>
-              <li className='py-2'>
-                <p className='text-gray-700'>
-                  A HIV test is done prior to initiating PEP, 28 days after
-                  taking the first PEP dose and 3 months after the initial HIV
-                  exposure. PEP will not protect you from unplanned pregnancy of
-                  other STIs.
-                </p>
-              </li>
-            </ul>
+          <div className='md:px-8 '>
+            <div className="my-2 bg-[#add8e6] py-2  rounded-md flex flex-col items-center justify-cneter">
+              <h2 className='text-2xl my-2  text-center font-bold mt-4 px-4 md:px-8'>
+                Facts about PEP
+              </h2>
+              <div className="rounded-full my-4 border-black  border-2 flex items-center justify-center text-center w-8 h-8 ">
+                <ArrowDown className="" />
+              </div>
+              <ul className='list-none flex items-start justif-start flex-col px-8 md:px-12'>
+                <div className="w-full h-2 my-2 bg-white rounded-full"></div>
+                <li className='py-2 text-center md:text-left'>
+                  <p className='text-gray-700'>
+                    PEP are ARV's that may be used to prevent HIV infection in a
+                    person exposed to HIV within 72 hours. You must take PEP
+                    within 72 hours of exposure for it to work optimally.
+                  </p>
+                </li>
+                <div className="w-full h-2 my-2 bg-white rounded-full"></div>
+
+                <li className='py-2 text-center md:text-left'>
+                  <p className='text-gray-700'>
+                    PEP will most likely not prevent HIV infection if it is
+                    started more than 72 hours after exposure.
+                  </p>
+                </li>
+                <div className="w-full h-2 my-2 bg-white rounded-full"></div>
+
+                <li className='py-2 text-center md:text-left'>
+                  <p className='text-gray-700'>
+                    You must take one pill daily for 28 days without skipping a
+                    dose.
+                  </p>
+                </li>
+                <div className="w-full h-2 my-2 bg-white rounded-full"></div>
+
+                <li className='py-2 text-center md:text-left'>
+                  <p className='text-gray-700'>
+                    A HIV test is done prior to initiating PEP, 28 days after
+                    taking the first PEP dose and 3 months after the initial HIV
+                    exposure. PEP will not protect you from unplanned pregnancy of
+                    other STIs.
+                  </p>
+                </li>
+              </ul>
+            </div>
             <h2 className='text-2xl font-bold my-4'>
               Quick guide to starting PEP
             </h2>

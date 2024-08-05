@@ -4,6 +4,7 @@ import sureCheck from "../assets/sure-check.jpeg";
 import { Link } from "react-router-dom";
 import prepAssessment from "../assets/prepAssessment.jpeg";
 import hivSelfKit from "../assets/hivSelfKit.jpeg";
+import { ArrowDown } from "lucide-react";
 
 const PREP = () => {
   return (
@@ -17,44 +18,54 @@ const PREP = () => {
             src='/images/prep.png'
             alt='PrEP Information'
             className='w-full md:h-[300px]'
-            style={{objectPosition: "top"}}
+            style={{ objectPosition: "top" }}
           />
         </div>
         <div className='md:w-4/5 md:px-8 text-gray-600 bg-white'>
-          <h2 className='text-2xl font-bold my-4'>Facts about PrEP</h2>
-          <ul className='list-disc px-8 md:px-6'>
-            <li className='py-2'>
-              <h5 className='font-semibold mb-2'>Effective</h5>
-              <p className='text-gray-700'>
-                If used consistently, PrEP can reduce the risk of HIV infection
-                by 99%. Consistent use means taking a tablet once-a-day, ideally
-                at the same time each day.
-              </p>
-            </li>
-            <li className='py-2'>
-              <h5 className='font-semibold mb-2'>Daily</h5>
-              <p className='text-gray-700'>
-                PrEP is a daily pill. PrEP must be taken every day to ensure
-                that you are fully protected.
-              </p>
-            </li>
-            <li className='py-2'>
-              <h5 className='font-semibold mb-2'>For Everyone</h5>
-              <p className='text-gray-700'>
-                PrEP is for anyone who thinks they are at risk of contracting
-                HIV regardless of gender, age, religion, race, sexuality, etc.
-              </p>
-            </li>
-            <li className='py-2'>
-              <h5 className='font-semibold mb-2'>Other STIs</h5>
-              <p className='text-gray-700'>
-                PrEP is revolutionary in its protection against HIV; however,
-                PrEP does not protect against any other STIs or pregnancy.
-                Therefore, it should be used in combination with other barrier
-                methods such as condoms.
-              </p>
-            </li>
-          </ul>
+          <div className="my-2 bg-[#add8e6] py-2  rounded-md flex flex-col items-center justify-center">
+
+            <h2 className='text-2xl font-bold my-4'>Facts about PrEP</h2>
+            <div className="rounded-full my-4 border-2 border-black flex items-center justify-center text-center w-8 h-8  ">
+              <ArrowDown className=" " />
+            </div>
+            <ul className='list-none px-8 md:px-6'>
+              <div className="w-full h-2 my-2 bg-white rounded-full"></div>
+              <li className='py-2 text-center md:text-left'>
+                <h5 className='font-semibold mb-2'>Effective</h5>
+                <p className='text-gray-700'>
+                  If used consistently, PrEP can reduce the risk of HIV infection
+                  by 99%. Consistent use means taking a tablet once-a-day, ideally
+                  at the same time each day.
+                </p>
+              </li>
+              <div className="w-full h-2 my-2 bg-white rounded-full"></div>
+              <li className='py-2 text-center md:text-left'>
+                <h5 className='font-semibold mb-2'>Daily</h5>
+                <p className='text-gray-700'>
+                  PrEP is a daily pill. PrEP must be taken every day to ensure
+                  that you are fully protected.
+                </p>
+              </li>
+              <div className="w-full h-2 my-2 bg-white rounded-full"></div>
+              <li className='py-2 text-center md:text-left'>
+                <h5 className='font-semibold mb-2'>For Everyone</h5>
+                <p className='text-gray-700'>
+                  PrEP is for anyone who thinks they are at risk of contracting
+                  HIV regardless of gender, age, religion, race, sexuality, etc.
+                </p>
+              </li>
+              <div className="w-full h-2 my-2 bg-white rounded-full"></div>
+              <li className='py-2 text-center md:text-left'>
+                <h5 className='font-semibold mb-2'>Other STIs</h5>
+                <p className='text-gray-700'>
+                  PrEP is revolutionary in its protection against HIV; however,
+                  PrEP does not protect against any other STIs or pregnancy.
+                  Therefore, it should be used in combination with other barrier
+                  methods such as condoms.
+                </p>
+              </li>
+            </ul>
+          </div>
           <div className='w-full text-gray-600'>
             <h2 className='text-2xl font-bold my-4'>
               What is PrEP Assessment Like

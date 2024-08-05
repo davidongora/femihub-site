@@ -5,7 +5,9 @@ const ChatbotModal = () => {
   const [chatMessage, setChatMMessage] = useState("");
 
   const toggleModal = () => {
-    setIsOpen(!isOpen);
+    // it was suggested that the button should directly open the chat
+    // setIsOpen(!isOpen);
+    OpenChat();
   };
 
   const sampleQuestions = [

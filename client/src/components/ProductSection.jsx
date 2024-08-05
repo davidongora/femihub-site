@@ -15,15 +15,13 @@ const ProductSection = ({ title }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+
   let [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    // if (searchParams.size < 2) {
     if (products.length <= 0) {
       fetchProducts();
-
     }
-    // }
   }, []);
 
 
@@ -48,6 +46,8 @@ const ProductSection = ({ title }) => {
 
 
 
+
+
   let currentProducts = []
   let totalPages = 0
 
@@ -59,6 +59,7 @@ const ProductSection = ({ title }) => {
       currentPage * itemsPerPage
     );
   }
+
 
 
   const handlePageChange = (page) => {
@@ -75,6 +76,7 @@ const ProductSection = ({ title }) => {
         <Message variant="success">please wait...</Message>
       ) : currentProducts.length > 0 && (
         <>
+    
           <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4">
             {currentProducts.map((product, index) => {
               return (<ProductCard key={index} {...product} />)
