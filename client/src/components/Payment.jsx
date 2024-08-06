@@ -39,7 +39,7 @@ const Payment = () => {
 
     // flutterwave 
     const config = {
-        public_key: 'FLWPUBK-89ca0b51778315670ea054141e32a17f-X',
+        public_key: process.env.FLW_PUBLIC_KEY,
         tx_ref: Date.now(),
         amount: total,
         currency: 'UGX',
