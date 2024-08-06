@@ -131,13 +131,27 @@ const TestimonialSection = () => {
   ];
 
 
-  const companies = [
-    "Google",
-    "Facebook",
-    "YouTube",
-    "Pinterest",
-    "Twitch",
-    "Webflow",
+  const companies = [{
+    name: "UNFPA",
+    image: "/images/UNFPA.png",
+  },
+    {
+    name: "TEF",
+    image: "/images/tef.jpg",
+  },
+    {
+    name: "Google For Statup",
+    image: "/images/google-logo.png",
+  },
+    {
+    name: "Vital Voices",
+    image: "/images/vitalvoices.jpg",
+  },
+    {
+    name: "USAID",
+    image: "/images/USAID.jpg",
+  },
+   
   ];
 
   return (
@@ -192,9 +206,9 @@ const TrustedCompanies = ({ companies }) => {
         {companies.map((company, index) => (
           <img
             key={index}
-            src={`/images/${company.toLowerCase()}-logo.png`}
-            alt={company}
-            className="h-8"
+            src={company.image}
+            alt={company.name}
+            className="h-16"
           />
         ))}
       </div>
