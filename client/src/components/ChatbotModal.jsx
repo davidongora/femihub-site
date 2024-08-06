@@ -30,9 +30,9 @@ const ChatbotModal = () => {
     <div>
       <button
         onClick={toggleModal}
-        className="fixed bottom-4 right-4 bg-custom-pink border border-gray-300 h-16 w-16 flex justify-center items-center text-white p-3 rounded-full shadow-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:ring-opacity-50"
+        className="fixed bottom-4 right-4 bg-white border border-gray-300 h-16 w-16 flex justify-center items-center text-white p-3 rounded-full shadow-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:ring-opacity-50"
       >
-        <svg
+        {/* <svg
           className="w-6 h-6"
           fill="none"
           stroke="currentColor"
@@ -45,7 +45,8 @@ const ChatbotModal = () => {
             strokeWidth="2"
             d="M8 10h.01M12 10h.01M16 10h.01M9 16h6m2 5a9 9 0 1 0-6.73-3.29L3 21l1.27-3.77A9 9 0 1 0 21 21z"
           />
-        </svg>
+        </svg> */}
+        <img src={"/images/whatsapp.gif"} alt="whatsapp" className="w-full h-full rounded-full" />
       </button>
       {isOpen && (
         <div className="fixed bottom-16 right-4 border border-custom-pink bg-white rounded-lg shadow-lg p-6 max-w-xs w-full z-50">
@@ -55,7 +56,7 @@ const ChatbotModal = () => {
               onClick={toggleModal}
               className="text-gray-600 hover:text-gray-900 focus:outline-none"
             >
-              <svg
+              {/* <svg
                 className="w-6 h-6"
                 fill="none"
                 stroke="currentColor"
@@ -68,7 +69,7 @@ const ChatbotModal = () => {
                   strokeWidth="2"
                   d="M6 18L18 6M6 6l12 12"
                 />
-              </svg>
+              </svg> */}
             </button>
           </div>
           <div className="mb-4">
