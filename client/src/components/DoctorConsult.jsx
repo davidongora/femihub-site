@@ -108,30 +108,28 @@ const ResultCard = ({ number, text }) => {
 const TestimonialSection = () => {
   const testimonials = [
     {
-      quote: "An amazing service",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipiscing lectus a nunc mauris scelerisque sed egestas.",
-      name: "John Carter",
-      position: "CEO at Google",
+      quote: "Peace of Mind in Every Click",
+      content: "My wife has a high-risk pregnancy, and we were constantly worried about her health and the well being of the unborn child. Bulamu Bridge Ai's emphasis on maternal health and their online consultation service saved us countles trips to the hospital. The convenience of accessing expert advice from the comfort of our home gave us peace of mind during an otherwise stressful period.",
+      name: "Josephine Mulungi",
+      position: "",
       image: null,
     },
     {
-      quote: "One of a kind service",
-      content:
-        "Ultrices eros in cursus turpis massa tincidunt sem nulla pharetra diam sit amet nisl suscipit adipis.",
-      name: "Sophie Moore",
-      position: "MD at Facebook",
+      quote: "Essential for every expecting mother",
+      content: "This app provides practical advice and emotional support that every expecting mother in Uganda needs. It’s a true companion throughout the journey.",
+      name: "Josephine Namutebi",
+      position: "Midwife, Kampala Health Clinic",
       image: null,
     },
     {
-      quote: "The best service",
-      content:
-        "Convallis posuere morbi leo urna molestie at elementum eu facilisis sapien pellentesque habitant.",
-      name: "Andy Smith",
-      position: "CEO Dot Austere",
+      quote: "Highly recommended for maternal care",
+      content: "The app's resources and community support have made a significant difference in my well-being during pregnancy. It's an amazing tool for maternal wellness.",
+      name: "Emmanuel Kibanja",
+      position: "Health Educator, Uganda Ministry of Health",
       image: null,
     },
   ];
+
 
   const companies = [
     "Google",
@@ -149,8 +147,7 @@ const TestimonialSection = () => {
           Testimonial
         </h2>
         <p className="text-center text-gray-600 mb-12">
-          Lorem ipsum dolor sit amet consectetur adipiscing elit semper dalar
-          elementum tempus hac tellus libero accumsan.
+          Hear from the mothers and healthcare professionals who have experienced the transformative impact of our maternal wellness app. Their stories highlight the support, guidance, and community that make our app an essential resource for a healthy pregnancy and postpartum journey.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
@@ -179,7 +176,7 @@ const TestimonialCard = ({ quote, content, name, position, image }) => {
       </div>
       <h3 className="text-xl font-semibold text-center mb-2">"{quote}"</h3>
       <p className="text-gray-600 text-center mb-4">{content}</p>
-      <p className="text-teal-600 font-medium text-center">{name}</p>
+      <p className="text-custom-pink font-medium text-center">{name}</p>
       <p className="text-gray-500 text-sm text-center">{position}</p>
     </div>
   );
