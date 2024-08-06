@@ -3,12 +3,21 @@ import { PaystackButton } from 'react-paystack';
 import { useGlobalContext } from "../context/GlobalContext";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import Flutterwave from "../util/FlutterwavePayment";
+import { toast } from 'react-toastify';
 import { X } from 'lucide-react';
+import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
+
+
 
 const Payment = () => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
-    const { cartItems, removeItemFromCart, addItemToCart } = useGlobalContext();
+    const { cartItems, removeItemFromCart, addItemToCart, user } = useGlobalContext();
+    const [phone, setPhone] = useState('');
+
 
     const shippingCost = 5000;
     const discount = 0;
@@ -21,50 +30,106 @@ const Payment = () => {
     }
 
     const total = subtotal + shippingCost + tax - discount;
-    const totalInKobo = total * 100; // Paystack requires amount in Kobo
-
-    const publicKey = "pk_test_0fe6b9f7f7e55a51fa421232e4588ccbccfbe397"; // Replace with your Paystack public key
-
-    const componentProps = {
-        email,
-        amount: totalInKobo,
-        publicKey,
-        text: "Pay Now",
-        onSuccess: (response) => alert(`Payment Successful! Reference: ${response.reference}`),
-        onClose: () => alert("Payment Closed"),
-    };
 
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('en-UG', { style: 'currency', currency: 'UGX' }).format(amount);
     };
+
+
+
+    // flutterwave 
+    const config = {
+        public_key: 'FLWPUBK-89ca0b51778315670ea054141e32a17f-X',
+        tx_ref: Date.now(),
+        amount: total,
+        currency: 'UGX',
+        payment_options: 'card, mobilemoneyuganda',
+        customer: {
+            email: email,
+            phone_number: phone,
+            name: user?.user?.name,
+        },
+        customizations: {
+            title: 'FemiHub',
+            description: 'Payment for items in cart',
+            logo: '/femihub.png',
+        },
+    };
+
+    const handleFlutterPayment = useFlutterwave(config);
+
+    const handlePaystackPayment = (e) => {
+        e.preventDefault();
+        handleFlutterPayment({
+            callback: async (response) => {
+                console.log(response)
+                if (response.status === "successful") {
+                    await createOrder(user?.user?.id, cartItems)
+                    removeItemFromCart(0, "all")
+
+                    toast.success("Payment successful")
+                }
+                closePaymentModal() // this will close the modal programmatically
+            },
+            onClose: () => { },
+        });
+
+    }
+
+
+
 
     return (
         <div className="flex flex-col items-center justify-center md:mx-20 bg-gray-100">
             <div className="bg-white p-8 w-full">
                 <h2 className="text-3xl font-semibold text-center mb-6">Checkout</h2>
                 <div className='grid grid-cols-1 gap-4 md:grid-cols-2 container'>
-                    <div>
-                        <form className="w-full mx-auto grid grid-cols-2 gap-2">
-                            <div className="mb-5 col-span-2">
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    onChange={(e) => setEmail(e.target.value)}
+                    <div className={`${cartItems?.length > 0 ? "col-span-1" : "col-span-2 flex items-center justify-center"}`}>
+                        {cartItems?.length > 0 ? (
+                            <form className="w-full mx-auto grid grid-cols-2 gap-2" onSubmit={handlePaystackPayment}>
+                                <div className="mb-5 col-span-2">
+                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        onChange={(e) => setEmail(e.target.value)}
 
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="name@flowbite.com"
-                                    required
-                                />
-                            </div>
-                            <div className="col-span-2 ">
-                                {cartItems.length > 0 ? (
-                                    <PaystackButton {...componentProps} currency='UGX' className="bg-custom-pink hover:bg-white hover:text-custom-pink text-white py-3 rounded-md w-full mt-4 focus:outline-none focus:ring focus:ring-blue-200" />
-                                ) : (
-                                    <p className='text-gray-600 text-sm'>No items in cart</p>
-                                )}
-                            </div>
-                        </form>
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="name@flowbite.com"
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-5 col-span-2">
+                                    <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Phone Number</label>
+                                    <input
+                                        type="phone"
+                                        id="tel"
+                                        onChange={(e) => setPhone(e.target.value)}
+
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="+256700734139"
+                                    />
+                                </div>
+                                <div className="col-span-2 ">
+
+                                    <div >
+                                        <button
+                                            type='submit'
+                                            className='bg-custom-pink hover:bg-white hover:text-custom-pink text-white py-3 rounded-md w-full mt-4 focus:outline-none focus:ring focus:ring-blue-200'
+                                        >
+                                            Pay Now
+                                        </button>
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        ) : (
+                            <button className=' max-w-sm hover:bg-white hover:text-custom-pink text-custom-pink flex items-center justify-center gap-2 py-3 rounded-md w-full mt-4 focus:outline-none focus:ring focus:ring-blue-200'>
+                                <ArrowLeft className='text-custom-pink' />
+                                <Link to="/"> Go to Home</Link>
+                            </button>
+                        )}
                     </div>
                     {cartItems.length > 0 && (
 
