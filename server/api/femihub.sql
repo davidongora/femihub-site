@@ -11,7 +11,8 @@ CREATE TABLE users (
     password VARCHAR(255),
     google_id VARCHAR(255) UNIQUE,
     apple_id VARCHAR(255) UNIQUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    pregant VARCHAR(20)
 );
 
 -- Doctors table
