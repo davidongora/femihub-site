@@ -22,6 +22,8 @@ const Cart = ({ isOpen, setIsOpen }) => {
         (sum, item) => sum + item.price * item.qty,
         0
       );
+      console.log(total, cartItems);
+      
       setTotals(total);
     }
   }, [cartItems]);
@@ -58,6 +60,7 @@ const Cart = ({ isOpen, setIsOpen }) => {
   };
 
   if (!isOpen) return null;
+
 
   return (
     <div className='fixed inset-0 overflow-hidden z-50'>

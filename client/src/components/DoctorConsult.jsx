@@ -1,6 +1,9 @@
 import React from "react";
 import { FiUser } from "react-icons/fi";
 import ServicesSection from "./ServiceSection";
+import { useFormik } from "formik";
+import { toast } from "react-toastify";
+import * as Yup from "yup"
 
 const DoctorConsult = () => {
   return (
@@ -133,25 +136,25 @@ const TestimonialSection = () => {
 
   const companies = [{
     name: "UNFPA",
-    image: "/images/UNFPA.png",
+    image: "/images/UNFPA.jpg",
   },
-    {
+  {
     name: "TEF",
     image: "/images/tef.jpg",
   },
-    {
+  {
     name: "Google For Statup",
-    image: "/images/google-logo.png",
+    image: "/images/google.jpg",
   },
-    {
+  {
     name: "Vital Voices",
     image: "/images/vitalvoices.jpg",
   },
-    {
+  {
     name: "USAID",
     image: "/images/USAID.jpg",
   },
-   
+
   ];
 
   return (
@@ -208,7 +211,7 @@ const TrustedCompanies = ({ companies }) => {
             key={index}
             src={company.image}
             alt={company.name}
-            className="h-16"
+            className="md:h-30 h-20"
           />
         ))}
       </div>
@@ -222,13 +225,30 @@ const TrustedCompanies = ({ companies }) => {
 };
 
 const NewsletterSubscription = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: ""
+    },
+    validationSchema: Yup.object().shape({
+      email: Yup.string().email().required()
+    }),
+    onSubmit: (values) => {
+      toast.success(`You have subscribed to femihub!`)
+      formik.resetForm()
+    }
+  })
   return (
     <div className="text-center">
       <h3 className="text-2xl font-semibold mb-4">
         Subscribe to our newsletter
       </h3>
-      <form className="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <form className="flex flex-col sm:flex-row justify-center items-center gap-4" onSubmit={formik.handleSubmit}>
         <input
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          disabled={formik.isSubmitting}
+          name="email"
+          defaultValue={formik.values.email}
           type="email"
           placeholder="Enter your email"
           className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-600 w-full sm:w-auto"

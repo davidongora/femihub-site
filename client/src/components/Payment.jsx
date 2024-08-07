@@ -61,7 +61,7 @@ const Payment = () => {
 
     const handleFlutterPayment = useFlutterwave(config);
 
-    const handlePaystackPayment = (e) => {
+    const handlePayment = (e) => {
         e.preventDefault();
         handleFlutterPayment({
             callback: async (response) => {
@@ -89,7 +89,7 @@ const Payment = () => {
                 <div className='grid grid-cols-1 gap-4 md:grid-cols-2 container'>
                     <div className={`${cartItems?.length > 0 ? "col-span-1" : "col-span-2 flex items-center justify-center"}`}>
                         {cartItems?.length > 0 ? (
-                            <form className="w-full mx-auto grid grid-cols-2 gap-2" onSubmit={handlePaystackPayment}>
+                            <form className="w-full mx-auto grid grid-cols-2 gap-2" onSubmit={handlePayment}>
                                 <div className="mb-5 col-span-2">
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                                     <input
