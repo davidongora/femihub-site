@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
 
 const Navbar = () => {
-  const { cartItems } = useGlobalContext();
+  const { cartItems, user, logout } = useGlobalContext();
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenCart, setIsOpenCart] = useState(false);
   const [isMobileCartModalOpen, setIsMobileCartOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState(null);
 
@@ -63,11 +64,10 @@ const Navbar = () => {
                         <FaChevronDown className="ml-1 text-[#E4258F] group-hover:text-gray-900 transition duration-300" />
                       </button>
                       <div
-                        className={`absolute z-10 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ${
-                          activeSubmenu === index
-                            ? "opacity-100 visible"
-                            : "opacity-0 invisible"
-                        }`}
+                        className={`absolute z-10 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-300 ${activeSubmenu === index
+                          ? "opacity-100 visible"
+                          : "opacity-0 invisible"
+                          }`}
                       >
                         <div
                           className="py-1"
@@ -96,6 +96,8 @@ const Navbar = () => {
                       {item.name}
                     </a>
                   )}
+
+
                 </div>
               ))}
             </div>
@@ -120,7 +122,26 @@ const Navbar = () => {
             {/* Pass setIsOpen prop to Cart */}
           </div>
 
-          <div className="lg:hidden">
+          <div className="lg:hidden flex items-center gap-2">
+            {/* made the cart visible on small screen */}
+            <div className="flex items-center">
+              <button className="p-1 rounded-full text-[#184363] hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#E4258F] focus:ring-white">
+                <VscHistory className="h-6 w-6" color="#E4258F" />
+              </button>
+              <button
+                onClick={() => setIsOpenCart(!isOpenCart)} // Toggle isOpen on click
+                className="ml-3 p-1 rounded-full text-[#184363] hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#E4258F] focus:ring-white relative"
+              >
+                <CiShoppingCart className="h-6 w-6" color="#E4258F" />
+                {cartItems.length > 0 && (
+                  <span className="bg-red-500 h-4 w-4 rounded-full text-white flex justify-center items-center text-sm absolute top-[-7px] right-[-4px]">
+                    {cartItems?.length}
+                  </span>
+                )}
+              </button>
+              {isOpenCart && <Cart isOpen={isOpenCart} setIsOpen={setIsOpenCart} />}{" "}
+              {/* Pass setIsOpen prop to Cart */}
+            </div>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -145,17 +166,16 @@ const Navbar = () => {
                   <>
                     <button
                       onClick={() => toggleSubmenu(index)}
-                      className="w-full text-left nav-item text-[#184363] hover:text-gray-900 block px-3 py-2 rounded-md text-base font-bold flex items-center"
+                      className="w-full text-left nav-item text-[#184363] hover:text-gray-900  px-3 py-2 rounded-md text-base font-bold flex items-center"
                     >
                       {item.name}
                       <FaChevronDown className="ml-1 text-[#E4258F] group-hover:text-gray-900 transition duration-300" />
                     </button>
                     <div
-                      className={`pl-4 transition-all duration-300 ${
-                        activeSubmenu === index
-                          ? "max-h-40 opacity-100"
-                          : "max-h-0 opacity-0"
-                      } overflow-hidden`}
+                      className={`pl-4 transition-all duration-300 ${activeSubmenu === index
+                        ? "max-h-40 opacity-100"
+                        : "max-h-0 opacity-0"
+                        } overflow-hidden`}
                     >
                       {item.submenu.map((subItem) => (
                         <a
@@ -180,6 +200,30 @@ const Navbar = () => {
                 )}
               </div>
             ))}
+            {user ? (
+              <button
+                onClick={logout}
+                className="nav-item capitalize text-[#184363] hover:text-gray-900 px-3 py-2 rounded-md text-sm font-bold"
+              >
+                logout
+              </button>
+            ) : (
+              <>
+                <Link
+                  to={"/login"}
+                  className="nav-item capitalize text-[#184363] hover:text-gray-900 px-3 py-2 rounded-md text-sm font-bold"
+                >
+                  Login
+                </Link>
+                <Link
+                  to={"/signup"}
+                  className="nav-item capitalize text-[#184363] hover:text-gray-900 px-3 py-2 rounded-md text-sm font-bold"
+                >
+                  signup
+                </Link>
+              </>
+            )}
+
           </div>
           <div className="pt-4 pb-3 border-t border-gray-700">
             <div className="flex items-center px-5">

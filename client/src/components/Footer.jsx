@@ -3,6 +3,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from 're
 import { MdLocationOn, MdEmail } from 'react-icons/md';
 import { FaCcPaypal, FaCcMastercard, FaCcVisa } from 'react-icons/fa';
 import femihublogo from "../../public/images/femihublogo.png"
+import { User } from 'lucide-react';
 const Footer = () => {
   return (
     <footer className='bg-custom-pink text-white py-12 w-full'>
@@ -31,13 +32,14 @@ const Footer = () => {
                 </a>
               </li>
               <li className='flex items-center space-x-2'>
-                <MdEmail className='w-5 h-5 flex-shrink-0' />
-                <a
-                  href='mailto:info@femihub.com'
+                <User className='w-5 h-5 flex-shrink-0' />
+                <p
+
                   className='hover:text-orange-500 transition duration-300'
                 >
-                  info@femihub.com
-                </a>
+                  Sales & Service Support /  +256 700 734139
+
+                </p>
               </li>
             </ul>
             <div className='flex space-x-4 mt-4'>

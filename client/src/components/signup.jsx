@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { sendMail } from "../util/Email";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -58,7 +59,13 @@ export default function Signup() {
           toast.error("Signup failed");
           return;
         }
-        toast.success("Signup successful! You'll be redirected shortly...");
+        sendMail('template_drwq4wx', {
+          to_name:formData.name,
+          message:"Thank you for signing up with us.",
+          reply_to:"info@hub.com",
+          email:formData.email
+        })
+        toast.success("Signup successful! You'll be redirected shortly...")
         setTimeout(() => {
           navigate("/login");
         }, 5000);

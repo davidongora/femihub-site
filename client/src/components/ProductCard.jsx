@@ -24,6 +24,7 @@ const ProductCard = ({ id, image, category, name, price, description }) => {
         <h3 className='text-lg text-gray-600 py-1 mb-2'>{name}</h3>
         <span className='text-sm text-gray-500'>{category}</span>
         <h6 className='text-custom-pink text-md'>Ush {price}</h6>
+        <h6 className='text-custom-pink text-md'> {category}</h6>
       </div>
       <button
         onClick={handleAddToCart}

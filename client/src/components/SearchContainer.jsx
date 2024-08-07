@@ -63,7 +63,7 @@ const SearchContainer = () => {
       try {
         const categoriesdata = await listCategories();
 
-        setCategories(Array.from(new Set([...categories, ...categoriesdata.filter((cat) => cat.id !== 4)])));
+        setCategories(Array.from(new Set([...categories, ...categoriesdata?.filter((cat) => cat.id !== 5)])));
       } catch (error) {
         console.log(error.message);
       }
@@ -88,9 +88,9 @@ const SearchContainer = () => {
               {categories.map((category, idx) => {
 
                 return (
-                  <a
+                  <Link
                     key={idx}
-                    href={category.name.toLowerCase() === "all categories" ? "/" : `/products?search=${keyword
+                    to={category.name.toLowerCase() === "all categories" ? "/" : `/products?search=${keyword
                       .trim()
                       .replace(" ", "-")}&catId=${category.id}`}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#E4258F] hover:text-white"
@@ -101,7 +101,7 @@ const SearchContainer = () => {
                     }}
                   >
                     {category.name}
-                  </a>
+                  </Link>
                 )
 
               })}
@@ -118,7 +118,7 @@ const SearchContainer = () => {
               setKeyword(e.target.value)
               navigate(`/products?search=${e.target.value
                 .trim()
-                .replace(" ", "-")}&catId=${selectedCatId}`)
+                .replace(" ", "-")}`)
             }}
           />
           <button

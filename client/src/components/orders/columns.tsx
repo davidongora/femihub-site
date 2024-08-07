@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "../../shad/ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
+import React from "react"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -28,6 +29,7 @@ export const columns: ColumnDef<Payment>[] = [
       const payment = row.original
  
       return (
+        <>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="h-8 w-8 p-1">
@@ -40,13 +42,14 @@ export const columns: ColumnDef<Payment>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(payment.id)}
             >
-              Copy payment ID
+              Copy payment ID 
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        </>
       )
     },
   },

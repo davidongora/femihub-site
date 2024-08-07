@@ -10,20 +10,21 @@ import { useSearchParams } from "react-router-dom";
 
 const ProductSection = ({ title }) => {
   const { products, setProducts } = useGlobalContext();
+  const [newproducts, setNewProducts] = useState([])
+
   const [error, setError] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+
   let [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    // if (searchParams.size < 2) {
     if (products.length <= 0) {
+      console.log("hit")
       fetchProducts();
-
     }
-    // }
   }, []);
 
 
@@ -38,13 +39,18 @@ const ProductSection = ({ title }) => {
 
       const data = await res.json();
 
-      setProducts(data);
+      console.log(data, "data")
+
+      // setProducts(data);
+      setNewProducts(data)
       setIsProcessing(false);
     } catch (error) {
       setError(error.message);
       setIsProcessing(false);
     }
   };
+
+
 
 
 
@@ -58,7 +64,15 @@ const ProductSection = ({ title }) => {
       (currentPage - 1) * itemsPerPage,
       currentPage * itemsPerPage
     );
+  }else{
+    totalPages = Math.ceil(newproducts.length / itemsPerPage);
+
+    currentProducts = newproducts.length > 0 ?newproducts?.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
+    ) : [];
   }
+
 
 
   const handlePageChange = (page) => {
@@ -70,11 +84,12 @@ const ProductSection = ({ title }) => {
     <div className="py-8">
       <h2 className="text-3xl font-bold text-gray-800 mb-8">{title}</h2>
       {error && (
-        <Message onClose={() => setError(null)}>SOmething went wromg..</Message>)}
+        <Message onClose={() => setError(null)}>Something went wrong..</Message>)}
       {isProcessing ? (
         <Message variant="success">please wait...</Message>
       ) : currentProducts.length > 0 && (
         <>
+    
           <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4">
             {currentProducts.map((product, index) => {
               return (<ProductCard key={index} {...product} />)
