@@ -3,12 +3,15 @@ import { PaystackButton } from 'react-paystack';
 import { useGlobalContext } from "../context/GlobalContext";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import Flutterwave from "../util/FlutterwavePayment";
 import { toast } from 'react-toastify';
 import { X } from 'lucide-react';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { createOrder } from '../lib/apiCalls';
+
+
+
 
 
 
@@ -39,7 +42,7 @@ const Payment = () => {
 
     // flutterwave 
     const config = {
-        public_key: process.env.FLW_PUBLIC_KEY,
+        public_key: import.meta.env.VITE_REACT_APP_FLW_PUBLIC_KEY,
         tx_ref: Date.now(),
         amount: total,
         currency: 'UGX',
