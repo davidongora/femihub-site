@@ -103,6 +103,7 @@ app.get('/home', (req, res) => {
         return "welcome to femihub";
     };
     res.send(greet());
+    res.json(greet());
 });
 
 
