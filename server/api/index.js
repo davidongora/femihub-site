@@ -98,6 +98,14 @@ db.connect((err) => {
   console.log("MySQL connected...");
 });
 
+app.get('/home', (req, res) => {
+    const greet = () => {
+        return "welcome to femihub";
+    };
+    res.send(greet());
+});
+
+
 // Google Authentication Routes
 app.get('/auth/google',
     passport.authenticate('google', {

@@ -1,0 +1,17 @@
+/* custom-admin-styles.css */
+.adminjs_root {
+    background-color: #151111; /* Change the background color */
+  }
+  
+  .adminjs_sidebar {
+    background-color: #333; /* Sidebar background color */
+  }
+  
+  .adminjs_sidebar a {
+    color: #000000; /* Sidebar link color */
+  }
+  
+  .adminjs_navbar {
+    background-color: #444; /* Navbar background color */
+  }
+  
