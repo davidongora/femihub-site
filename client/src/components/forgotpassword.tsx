@@ -58,7 +58,7 @@ const Forgotpassword = () => {
 
                     <input type="email" onChange={formik.handleChange} name='email' defaultValue={formik.values.email} onBlur={formik.handleBlur} disabled={formik.isSubmitting} required placeholder='m@example.com' className='border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:border-pink-500' />
 
-                    <button type="submit" className='w-full rounded-md bg-custom-pink  hover:bg-white hover:border-custom-pink focus:text-custom-pink px-2 py-3 text-white my-2'>reset password</button>
+                    <button type="submit" className='w-full rounded-md bg-custom-pink  hover:bg-white hover:border-custom-pink focus:text-white px-2 py-3 text-white my-2'>reset password</button>
                 </form>
             </div>
         </div>

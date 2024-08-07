@@ -78,7 +78,7 @@ const Login = () => {
               className=' text-gray-700 font-bold mb-2 flex justify-between'
             >
               Password
-              <Link className="text-muted text-custom-pink text-sm font-thin cursor-pointer">forgot password?</Link>
+              <Link to={"/forgotpassword"} className="text-muted text-custom-pink text-sm font-thin cursor-pointer">forgot password?</Link>
             </label>
             <input
               type='password'
