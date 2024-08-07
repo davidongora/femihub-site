@@ -16,15 +16,20 @@ const PasswordResetRequest = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button type="submit">Reset Password</button>
-    </form>
+
+    <div className="flex flex-col items-center justify-center min-h-screen bg-pink-300">
+      page under development
+    </div>
+    
+    // <form onSubmit={handleSubmit}>
+    //   <input
+    //     type="email"
+    //     placeholder="Enter your email"
+    //     value={email}
+    //     onChange={(e) => setEmail(e.target.value)}
+    //   />
+    //   <button type="submit">Reset Password</button>
+    // </form>
   );
 };
 
