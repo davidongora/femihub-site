@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer className='bg-custom-pink text-white py-12 w-full'>
       <div className='container mx-auto px-4'>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
+        <div className='grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-8'>
           {/* Logo and Newsletter */}
           <div className='space-y-4'>
             <img src={femihublogo} alt='Logo' className='w-16 h-16' />
@@ -16,7 +16,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className='text-lg font-semibold mb-4'>About / Contacts</h3>
+            <h3 className='text-lg font-semibold mb-4'>Contacts</h3>
             <ul className='space-y-2 text-sm'>
               <li className='flex items-start space-x-2'>
                 <MdLocationOn className='w-5 h-5 mt-1 flex-shrink-0' />
@@ -28,17 +28,23 @@ const Footer = () => {
                   href='mailto:femihub@gmail.com'
                   className='hover:text-orange-500 transition duration-300'
                 >
-                  femihub@gmail.com
+                  femihub@gmail.com 
+                </a>
+              </li>
+              <li className='flex items-center space-x-2'>
+                <MdEmail className='w-5 h-5 flex-shrink-0' />
+                <a
+                  href='mailto:femihub@gmail.com'
+                  className='hover:text-orange-500 transition duration-300'
+                >
+                  info@femihub.com
                 </a>
               </li>
               <li className='flex items-center space-x-2'>
                 <User className='w-5 h-5 flex-shrink-0' />
-                <p
-
-                  className='hover:text-orange-500 transition duration-300'
+                <p className='row-12 hover:text-orange-500 transition duration-300'
                 >
-                  Sales & Service Support /  +256 700 734139
-
+                  <span>Sales & Service Support / +256 700 734139</span>
                 </p>
               </li>
             </ul>
