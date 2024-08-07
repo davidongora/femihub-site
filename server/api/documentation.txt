@@ -452,4 +452,100 @@ http://localhost:3000
 
 ---
 
-Let me know if you need any more adjustments!
+`/forgot-password` and `/reset-password` endpoints:
+
+---
+
+### **Forgot Password Endpoint**
+
+**Endpoint:** `POST /forgot-password`
+
+**Description:** 
+Initiates a password reset process by generating a reset token and updating the user's record in the database with the token.
+
+**Request:**
+
+- **Headers:**
+  - `Content-Type: application/json`
+  
+- **Body:**
+  ```json
+  {
+    "email": "user@example.com"
+  }
+  ```
+
+**Response:**
+
+- **Success (200 OK):**
+  ```json
+  {
+    "message": "Password reset email sent",
+    "token": "generated-reset-token"
+  }
+  ```
+  
+- **Error (400 Bad Request):**
+  ```json
+  {
+    "error": "User not found"
+  }
+  ```
+  
+- **Error (500 Internal Server Error):**
+  ```json
+  {
+    "error": "Error processing forgot password request"
+  }
+  ```
+
+
+
+---
+
+### **Reset Password Endpoint**
+
+**Endpoint:** `POST /reset-password`
+
+**Description:** 
+Resets the user's password using the provided reset token and new password. The reset token is invalidated after use.
+
+**Request:**
+
+- **Headers:**
+  - `Content-Type: application/json`
+  
+- **Body:**
+  ```json
+  {
+    "token": "provided-reset-token",
+    "newPassword": "new-password"
+  }
+  ```
+
+**Response:**
+
+- **Success (200 OK):**
+  ```json
+  {
+    "message": "Password reset successful"
+  }
+  ```
+  
+- **Error (400 Bad Request):**
+  ```json
+  {
+    "error": "Invalid token"
+  }
+  ```
+  
+- **Error (500 Internal Server Error):**
+  ```json
+  {
+    "error": "Error resetting password: error-message"
+  }
+  ```
+
+
+---
+
