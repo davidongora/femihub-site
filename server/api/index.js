@@ -10,6 +10,8 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const paypal = require('@paypal/checkout-server-sdk');
 require('dotenv').config();
+const crypto = require('crypto');
+
 
 
 const DBHOST = '45.56.98.224';
@@ -96,6 +98,14 @@ db.connect((err) => {
   console.log("MySQL connected...");
 });
 
+app.get('/home', (req, res) => {
+    const greet = () => {
+        return "welcome to femihub";
+    };
+    res.send(greet());
+});
+
+
 // Google Authentication Routes
 app.get('/auth/google',
     passport.authenticate('google', {
@@ -145,6 +155,61 @@ app.post('/login', (req, res) => {
     });
 });
 
+app.post('/forgot-password', async (req, res) => {
+    const { email } = req.body;
+  
+    try {
+      const query = 'SELECT * FROM users WHERE email = ?';
+      db.query(query, [email], (err, results) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (results.length === 0) return res.status(400).json({ error: 'User not found' });
+  
+        const user = results[0];
+  
+        const resetToken = crypto.randomBytes(20).toString('hex');
+  
+        const updateQuery = 'UPDATE users SET reset_token = ? WHERE id = ?';
+        db.query(updateQuery, [resetToken, user.id], (err) => {
+          if (err) return res.status(500).json({ error: err.message });
+  
+          console.log('Password reset token generated:', resetToken); 
+          res.status(200).json({ message: 'Password reset email sent', token: resetToken }); 
+        });
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Error processing forgot password request' });
+    }
+  });
+
+  app.post('/reset-password', async (req, res) => {
+    const { token, newPassword } = req.body;
+   
+
+    if (!token || !newPassword) {
+        return res.status(400).json({ error: 'Token and new password are required' });
+    }
+
+    try {
+        const query = 'SELECT * FROM users WHERE reset_Token = ?';
+        const [results] = await db.promise().query(query, [token]);
+
+        if (results.length === 0) {
+            return res.status(400).json({ error: 'Invalid token' });
+        }
+
+        const user = results[0];
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        const updateQuery = 'UPDATE users SET password = ?, reset_Token = NULL WHERE id = ?';
+        await db.promise().query(updateQuery, [hashedPassword, user.id]);
+
+        res.status(200).json({ message: 'Password reset successful' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error resetting password: ' + error.message });
+    }
+});
+  
 // Apple Authentication Configuration
 // const AppleAuth = require('apple-auth');
 // const appleAuth = new AppleAuth({
@@ -804,6 +869,7 @@ app.get('/shop/category/:categoryId', (req, res) => {
         res.json(results);
     });
 });
+
 
 // Reminder endpoints (to be added later)
 
