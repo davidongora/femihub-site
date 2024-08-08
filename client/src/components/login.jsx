@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BASEHOST } from "../use";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
+import { Link } from "react-router-dom";
 const Login = () => {
   const { user, setUser } = useGlobalContext();
   const [email, setEmail] = useState("");
@@ -74,9 +75,10 @@ const Login = () => {
           <div className='mb-4'>
             <label
               htmlFor='password'
-              className='block text-gray-700 font-bold mb-2'
+              className=' text-gray-700 font-bold mb-2 flex justify-between'
             >
               Password
+              <Link to={"/forgotpassword"} className="text-muted text-custom-pink text-sm font-thin cursor-pointer">forgot password?</Link>
             </label>
             <input
               type='password'

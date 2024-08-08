@@ -22,6 +22,8 @@ const Cart = ({ isOpen, setIsOpen }) => {
         (sum, item) => sum + item.price * item.qty,
         0
       );
+      console.log(total, cartItems);
+      
       setTotals(total);
     }
   }, [cartItems]);
@@ -58,6 +60,7 @@ const Cart = ({ isOpen, setIsOpen }) => {
   };
 
   if (!isOpen) return null;
+
 
   return (
     <div className='fixed inset-0 overflow-hidden z-50'>
@@ -152,7 +155,7 @@ const Cart = ({ isOpen, setIsOpen }) => {
                 <div className='border-t border-gray-200 py-6 px-4 sm:px-6'>
                   <div className='flex justify-between text-base font-medium text-gray-900'>
                     <p>Subtotal</p>
-                    <p>Ush {totals.toFixed(2)}</p>
+                    <p>Ush {totals}</p>
                   </div>
                   <p className='mt-0.5 text-sm text-gray-500'>
                     Shipping and taxes calculated at checkout.
