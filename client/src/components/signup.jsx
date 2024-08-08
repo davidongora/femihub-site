@@ -166,7 +166,6 @@ export default function Signup() {
           >
             {loading ? 'Signing up...' : 'Signup'}
           </button>
-          <a href="/forgot" className="text-2xl font-bold text-pink-500 mb-4">Forgot Password? Reset</a>
 
         </form>
       </div>
