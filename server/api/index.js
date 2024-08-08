@@ -82,7 +82,7 @@ const db = mysql.createPool({
     database: DATABASE,
     port: 3306,
     waitForConnections: true,
-    connectionLimit: 100,
+    connectionLimit: 10,
     queueLimit: 0
   });
 
