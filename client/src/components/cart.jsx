@@ -18,8 +18,9 @@ const Cart = ({ isOpen, setIsOpen }) => {
 
   useEffect(() => {
     if (cartItems.length > 0) {
+      
       const total = cartItems.reduce(
-        (sum, item) => sum + item.price * item.qty,
+        (sum, item) => sum + parseFloat(item.price) * parseInt(item.qty),
         0
       );
       console.log(total, cartItems);

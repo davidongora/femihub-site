@@ -22,6 +22,9 @@ const Payment = () => {
     const [phone, setPhone] = useState('');
 
 
+    console.log(cartItems)
+
+
     const shippingCost = 5000;
     const discount = 0;
     let tax = 0;
