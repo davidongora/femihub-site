@@ -31,7 +31,10 @@ const Payment = () => {
     let subtotal = 0;
 
     if (cartItems.length > 0) {
-        subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        subtotal = cartItems.reduce(
+            (sum, item) => sum + parseFloat(item.price.replace(/,/g, '')) * parseInt(item.qty),
+            0
+          );;
         tax = subtotal * 0.18;
     }
 
