@@ -99,12 +99,9 @@ db.connect((err) => {
 });
 
 app.get('/home', (req, res) => {
-    const greet = () => {
-        return "welcome to femihub";
-    };
-    res.send(greet());
-    res.json(greet());
-});
+    res.send('Hello World!');
+  });
+  
 
 
 // Google Authentication Routes
@@ -878,3 +875,6 @@ const PORT = 3030;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+
+module.exports = app;
