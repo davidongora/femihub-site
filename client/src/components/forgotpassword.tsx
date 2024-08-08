@@ -16,31 +16,32 @@ const Forgotpassword = () => {
             email: Yup.string().email().required()
         }),
         onSubmit: async (values, formikHelpers) => {
-            // const res = await axios.post(BASEHOST + "/forgot-password", {
-            //     email: values.email
-            // },
-            //     {
-            //         headers: {
-            //             "Content-Type": "application/json",
+            const res = await axios.post(BASEHOST + "/forgot-password", {
+                email: values.email
+            },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
 
-            //         }
-            //     })
-
-
-            // console.log(res, res.data, res.status)
-
-            let customizedurl = new URL("resetpassword", "http://localhost:5173/")
-            customizedurl.searchParams.set("t", "hjhghjg")
-            sendMail('service_do7asl9', 'template_v1navwb', {
-                to_name: values.email,
-                url: customizedurl,
-                send_to: values.email
-            })
-
-            toast.success("link sent to email")
+                    }
+                })
 
 
-            formik.resetForm()
+            if (res.status === 200) {
+                let customizedurl = new URL("resetpassword", window.location.href)
+                customizedurl.searchParams.set("t", res.data?.token)
+                sendMail('service_do7asl9', 'template_v1navwb', {
+                    to_name: values.email,
+                    url: customizedurl,
+                    send_to: values.email
+                })
+
+                toast.success("link sent to email")
+
+
+                formik.resetForm()
+
+            }
 
         },
     })
@@ -58,7 +59,7 @@ const Forgotpassword = () => {
 
                     <input type="email" onChange={formik.handleChange} name='email' defaultValue={formik.values.email} onBlur={formik.handleBlur} disabled={formik.isSubmitting} required placeholder='m@example.com' className='border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:border-pink-500' />
 
-                    <button type="submit" className='w-full rounded-md bg-custom-pink  hover:bg-white hover:border-custom-pink focus:text-white px-2 py-3 text-white my-2'>reset password</button>
+                    <button type="submit" className='w-full rounded-md bg-custom-pink hover:text-custom-pink transition-all duration-300 hover:border  hover:bg-white hover:border-custom-pink  px-2 py-3 text-white my-2'>reset password</button>
                 </form>
             </div>
         </div>

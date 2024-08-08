@@ -26,7 +26,7 @@ import Payment from "./components/Payment";
 import Privateroute from "./util/privateroute";
 import Order from "./components/orders/Order";
 import Forgotpassword from "./components/forgotpassword";
-import PasswordResetRequest from "./components/PasswordResetRequest";
+import ResetPassword from "./components/ResetPassword";
 
 const Home = () => (
   <div className="px-2 md:px-[100px] mt-2">
@@ -50,7 +50,7 @@ const App = () => {
         <Route path="/doctorverify" element={<DoctorForm />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/resetpassword" element={<PasswordResetRequest />} />
+        <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/faqs" element={<FAQS />} />
         <Route path="/prep" element={<PREP />} />
