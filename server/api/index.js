@@ -9,6 +9,7 @@ const cors = require('cors');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const paypal = require('@paypal/checkout-server-sdk');
+const useragent = require('express-useragent');
 require('dotenv').config();
 const crypto = require('crypto');
 
@@ -28,6 +29,8 @@ app.use(
 		maxAge: 24 * 60 * 60 * 1000,
 	})
 );
+
+app.use(useragent.express());
 
 app.use(express.json());
 app.use(session({
@@ -100,6 +103,17 @@ app.get('/home', (req, res) => {
   
 
 
+/** 
+app.get('/check_device', async (req, res) => {
+    const appSource = req.headers['x-app-source'];
+    if (appSource === 'mobile') {
+        console.log('Request from mobile app');
+    } else {
+        console.log('Request from web browser');
+    }
+})
+*/
+
 // Google Authentication Routes
 app.get('/auth/google',
     passport.authenticate('google', {
@@ -124,7 +138,8 @@ app.post('/register', async (req, res) => {
             return res.status(400).json({ error: 'Password is required' });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10)
+
         const query = 'INSERT INTO users (name, email, phone_number, password) VALUES (?, ?, ?, ?)';
         db.query(query, [name, email, phone_number, hashedPassword], (err, result) => {
             if (err) return res.status(500).json({ error: err.message });
@@ -148,6 +163,24 @@ app.post('/login', (req, res) => {
         res.json({ token ,  user: { id: user.id, email: user.email, name: user.name} });
     });
 });
+
+app.get('/list_users', (req, res) => {
+    const email = req.query.email;
+    let query
+    if (email) {
+        query = `SELECT * FROM users WHERE email = ?`;
+        db.query(query, [email], (err, results) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(results);
+        });
+    } else {
+        query = 'SELECT * FROM users';
+        db.query(query, (err, results) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(results);
+        });
+    }
+})
 
 app.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
@@ -461,12 +494,32 @@ app.post('/periods', (req, res) => {
 });
 
 app.get('/periods', (req, res) => {
-    const query = 'SELECT * FROM periods';
-    db.query(query, (err, results) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(results);
-    });
+    const user_id = req.query.user_id
+    let query;
+
+    if (user_id) {
+        query = 'SELECT * FROM periods WHERE user_id = ?'
+        db.query(query, [user_id], (err, results) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(results);
+        });
+    } else {
+        query = 'SELECT * FROM periods'
+        db.query(query, (err, results) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(results);
+        });
+    }
 });
+
+app.delete('/periods', (req, res) => {
+    const { user_id } = req.body;
+    const query = 'DELETE FROM periods WHERE user_id = ?';
+    db.query(query, [user_id], (err, result) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.status(200).json({ message: 'Periods deleted successfully' });
+    });
+})
 
 // Payments endpoints
 app.post('/payments', (req, res) => {
