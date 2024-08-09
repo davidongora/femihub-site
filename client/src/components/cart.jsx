@@ -16,13 +16,32 @@ const Cart = ({ isOpen, setIsOpen }) => {
   const [loading, setLoading] = useState(false);
   const navigate= useNavigate()
 
+  const formatCurrencyUGX = (value) => {
+    // Format as UGX without decimal places
+    return new Intl.NumberFormat('en-UG', {
+      style: 'currency',
+      currency: 'UGX',
+      minimumFractionDigits: 0, // UGX usually doesn't use decimal places
+      maximumFractionDigits: 0,
+    }).format(value);
+  };
+
   useEffect(() => {
     if (cartItems.length > 0) {
-      const total = cartItems.reduce(
-        (sum, item) => sum + item.price * item.qty,
-        0
-      );
-      setTotals(total);
+      const calculateTotal = (cartItems) => {
+        // Parse and calculate the total
+        const total = cartItems.reduce(
+          (sum, item) => sum + parseFloat(item.price.replace(/,/g, '')) * parseInt(item.qty),
+          0
+        );
+      
+        // Format the total
+        return formatCurrencyUGX(total);
+      };
+
+      
+      
+      setTotals(calculateTotal(cartItems));
     }
   }, [cartItems]);
 
@@ -58,6 +77,7 @@ const Cart = ({ isOpen, setIsOpen }) => {
   };
 
   if (!isOpen) return null;
+
 
   return (
     <div className='fixed inset-0 overflow-hidden z-50'>
@@ -152,7 +172,7 @@ const Cart = ({ isOpen, setIsOpen }) => {
                 <div className='border-t border-gray-200 py-6 px-4 sm:px-6'>
                   <div className='flex justify-between text-base font-medium text-gray-900'>
                     <p>Subtotal</p>
-                    <p>Ush {totals.toFixed(2)}</p>
+                    <p>{totals}</p>
                   </div>
                   <p className='mt-0.5 text-sm text-gray-500'>
                     Shipping and taxes calculated at checkout.

@@ -22,13 +22,19 @@ const Payment = () => {
     const [phone, setPhone] = useState('');
 
 
+    console.log(cartItems)
+
+
     const shippingCost = 5000;
     const discount = 0;
     let tax = 0;
     let subtotal = 0;
 
     if (cartItems.length > 0) {
-        subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        subtotal = cartItems.reduce(
+            (sum, item) => sum + parseFloat(item.price.replace(/,/g, '')) * parseInt(item.qty),
+            0
+          );;
         tax = subtotal * 0.18;
     }
 
@@ -61,7 +67,7 @@ const Payment = () => {
 
     const handleFlutterPayment = useFlutterwave(config);
 
-    const handlePaystackPayment = (e) => {
+    const handlePayment = (e) => {
         e.preventDefault();
         handleFlutterPayment({
             callback: async (response) => {
@@ -89,7 +95,7 @@ const Payment = () => {
                 <div className='grid grid-cols-1 gap-4 md:grid-cols-2 container'>
                     <div className={`${cartItems?.length > 0 ? "col-span-1" : "col-span-2 flex items-center justify-center"}`}>
                         {cartItems?.length > 0 ? (
-                            <form className="w-full mx-auto grid grid-cols-2 gap-2" onSubmit={handlePaystackPayment}>
+                            <form className="w-full mx-auto grid grid-cols-2 gap-2" onSubmit={handlePayment}>
                                 <div className="mb-5 col-span-2">
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                                     <input

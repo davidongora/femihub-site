@@ -25,6 +25,8 @@ import ProductViewPage from "./components/ProductView";
 import Payment from "./components/Payment";
 import Privateroute from "./util/privateroute";
 import Order from "./components/orders/Order";
+import Forgotpassword from "./components/forgotpassword";
+import ResetPassword from "./components/ResetPassword";
 
 const Home = () => (
   <div className="px-2 md:px-[100px] mt-2">
@@ -48,6 +50,7 @@ const App = () => {
         <Route path="/doctorverify" element={<DoctorForm />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/faqs" element={<FAQS />} />
         <Route path="/prep" element={<PREP />} />
@@ -58,6 +61,7 @@ const App = () => {
         <Route path="/products" element={<Search />} />
         <Route path="/orders" element={<Order />} />
         <Route path="/products/:id" element={<ProductViewPage />} />
+        <Route path="/forgotpassword" element={<Forgotpassword />} />
         <Route element={<Privateroute />}>
           <Route path="/payment" element={<Payment />} /></Route>
 

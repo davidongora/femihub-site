@@ -1,3 +1,4 @@
+// Signup.jsx
 import React, { useState } from "react";
 import Joi from "joi";
 import axios from "axios";
@@ -50,43 +51,61 @@ export default function Signup() {
       password: formData.password,
     };
 
+    console.log(data);
+
     setLoading(true);
 
-    axios
-      .post(`${BASEHOST}/register`, data)
+    axios.post(`${BASEHOST}/register`, data)
       .then((response) => {
         if (response.status !== 201) {
-          toast.error("Signup failed");
+          toast.error("Signup failed" + error);
           return;
         }
-        sendMail('template_drwq4wx', {
-          to_name:formData.name,
-          message:"Thank you for signing up with us.",
-          reply_to:"info@hub.com",
-          email:formData.email
-        })
-        toast.success("Signup successful! You'll be redirected shortly...")
+        sendMail('service_do7asl9', 'template_drwq4wx', {
+          to_name: formData.name,
+          message: "Thank you for signing up with us.",
+          reply_to: formData.email,
+          send_to: formData.email,
+        });
+        toast.success("Signup successful! You'll be redirected shortly...");
         setTimeout(() => {
+          console.log("email sent");
           navigate("/login");
         }, 5000);
       })
-      
       .catch((error) => {
-        console.log(error)
-         const message = error?.response
-           ? error?.response?.data?.error
-           : error?.message;
-         toast.error(message);
+        console.log(error);
+        const message = error?.response
+          ? error?.response?.data?.error
+          : error?.message;
+        toast.error(message);
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
+  // const handleTestSubmit = () => {
+  //   const testFormData = {
+  //     name: "",
+  //     email: "",
+  //     phone_number: "",
+  //     password: "",
+  //   };
+  //   setFormData(testFormData);
+  //   handleSubmit({ preventDefault: () => {} });
+  // };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-pink-200">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold text-pink-500 mb-4">Signup</h2>
+        {/* <button
+          onClick={handleTestSubmit}
+          className="mb-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md"
+        >
+          Test Signup
+        </button> */}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
@@ -147,6 +166,7 @@ export default function Signup() {
           >
             {loading ? 'Signing up...' : 'Signup'}
           </button>
+
         </form>
       </div>
     </div>

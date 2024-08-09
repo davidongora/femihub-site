@@ -4,16 +4,13 @@ emailjs.init({
   publicKey: '9Nb8ekAzudfnLyZ6P',
 })
 
-export const sendMail = (templateid, templateParams) => {
-  
-  
-  
-  emailjs.send('service_do7asl9', templateid, templateParams).then(
-    (response) => {
+export const sendMail = (serviceID, templateID, variables) => {
+  emailjs.send(serviceID, templateID, variables)
+    .then((response) => {
       console.log('SUCCESS!', response.status, response.text);
-    },
-    (error) => {
+    })
+    .catch((error) => {
       console.log('FAILED...', error);
-    },
-  );
+    });
 };
+

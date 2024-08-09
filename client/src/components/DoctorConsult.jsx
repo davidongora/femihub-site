@@ -1,6 +1,11 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { FiUser } from "react-icons/fi";
 import ServicesSection from "./ServiceSection";
+import { useFormik } from "formik";
+import { toast } from "react-toastify";
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
+import * as Yup from "yup"
 
 const DoctorConsult = () => {
   return (
@@ -106,6 +111,7 @@ const ResultCard = ({ number, text }) => {
 };
 
 const TestimonialSection = () => {
+
   const testimonials = [
     {
       quote: "Peace of Mind in Every Click",
@@ -133,25 +139,25 @@ const TestimonialSection = () => {
 
   const companies = [{
     name: "UNFPA",
-    image: "/images/UNFPA.png",
+    image: "/images/UNFPA.jpg",
   },
-    {
+  {
     name: "TEF",
     image: "/images/tef.jpg",
   },
-    {
+  {
     name: "Google For Statup",
-    image: "/images/google-logo.png",
+    image: "/images/google.jpg",
   },
-    {
+  {
     name: "Vital Voices",
     image: "/images/vitalvoices.jpg",
   },
-    {
+  {
     name: "USAID",
     image: "/images/USAID.jpg",
   },
-   
+
   ];
 
   return (
@@ -197,38 +203,77 @@ const TestimonialCard = ({ quote, content, name, position, image }) => {
 };
 
 const TrustedCompanies = ({ companies }) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay()]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (emblaApi) {
+      const handleSelect = () => setActiveIndex(emblaApi.selectedScrollSnap());
+      emblaApi.on('select', handleSelect);
+      return () => emblaApi.off('select', handleSelect);
+    }
+  }, [emblaApi]);
+
+  const totalSlides = emblaApi ? emblaApi.slideNodes().length : 0;
+
   return (
     <div className="mb-16">
       <h3 className="text-xl font-semibold text-center text-custom-pink mb-8">
         Trusted by 10,000+ companies around the world
       </h3>
-      <div className="flex flex-wrap justify-center items-center gap-8">
-        {companies.map((company, index) => (
-          <img
-            key={index}
-            src={company.image}
-            alt={company.name}
-            className="h-16"
-          />
-        ))}
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex">
+          {companies.map((company, index) => (
+            <img
+              key={index}
+              src={company.image}
+              alt={company.name}
+              className="md:h-[250px] md:w-[100px] h-[60px] object-contain"
+              style={{
+                flex: "0 0 100%",
+                minWidth: "0"
+              }}
+            />
+          ))}
+        </div>
       </div>
       <div className="flex justify-center mt-6">
-        <span className="bg-teal-600 w-2 h-2 rounded-full mx-1"></span>
-        <span className="bg-gray-300 w-2 h-2 rounded-full mx-1"></span>
-        <span className="bg-gray-300 w-2 h-2 rounded-full mx-1"></span>
+        {Array.from({ length: totalSlides }).map((_, index) => (
+          <span
+            key={index}
+            className={`w-2 h-2 rounded-full mx-1 ${index === activeIndex ? 'bg-custom-pink' : 'bg-gray-300'}`}
+          ></span>
+        ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const NewsletterSubscription = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: ""
+    },
+    validationSchema: Yup.object().shape({
+      email: Yup.string().email().required()
+    }),
+    onSubmit: (values) => {
+      toast.success(`You have subscribed to femihub!`)
+      formik.resetForm()
+    }
+  })
   return (
     <div className="text-center">
       <h3 className="text-2xl font-semibold mb-4">
         Subscribe to our newsletter
       </h3>
-      <form className="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <form className="flex flex-col sm:flex-row justify-center items-center gap-4" onSubmit={formik.handleSubmit}>
         <input
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          disabled={formik.isSubmitting}
+          name="email"
+          defaultValue={formik.values.email}
           type="email"
           placeholder="Enter your email"
           className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-600 w-full sm:w-auto"
