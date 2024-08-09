@@ -480,11 +480,22 @@ app.post('/periods', (req, res) => {
 });
 
 app.get('/periods', (req, res) => {
-    const query = 'SELECT * FROM periods';
-    db.query(query, (err, results) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(results);
-    });
+    const user_id = req.query.user_id
+    let query;
+
+    if (user_id) {
+        query = 'SELECT * FROM periods WHERE user_id = ?'
+        db.query(query, [user_id], (err, results) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(results);
+        });
+    } else {
+        query = 'SELECT * FROM periods'
+        db.query(query, (err, results) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(results);
+        });
+    }
 });
 
 // Payments endpoints
