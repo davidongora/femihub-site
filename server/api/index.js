@@ -149,6 +149,25 @@ app.post('/login', (req, res) => {
     });
 });
 
+app.get('/list_users', (req, res) => {
+    const email = req.query.email;
+    let query
+    if (email) {
+        query = `SELECT * FROM users WHERE email = ?`;
+        db.query(query, [email], (err, results) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(results);
+        });
+    } else {
+        query = 'SELECT * FROM users';
+        db.query(query, (err, results) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(results);
+        });
+    }
+})
+
+
 app.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
   
